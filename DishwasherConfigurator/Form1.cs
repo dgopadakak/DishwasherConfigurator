@@ -46,14 +46,23 @@ namespace DishwasherConfigurator
             int type = getTypeOfAction();
             if (type != -1)
             {
+                buttonSelectActionCancel.Enabled = true;
+                buttonAddThread1.Enabled = true;
+                buttonAddThread2.Enabled = true;
+                buttonAddThread3.Enabled = true;
+
+                labelSelectedAction.Text = "Выбрано действие: " + treeViewActionSelecter.SelectedNode.Text;
                 int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
                 if (typesOfTimeBasedActions.Contains(type))
                 {
-                    ///////////////////////////////////////////////////////////////////////////
+                    labelTime.Enabled = true;
+                    textBoxTime.Enabled = true;
                 }
                 else
                 {
-                    ///////////////////////////////////////////////////////////////////////////
+                    textBoxTime.Text = "";
+                    labelTime.Enabled = false;
+                    textBoxTime.Enabled = false;
                 }
             }
             else
@@ -62,9 +71,20 @@ namespace DishwasherConfigurator
             }
         }
 
+        private void buttonSelectActionCancel_Click(object sender, EventArgs e)
+        {
+            labelSelectedAction.Text = "Действие не выбрано";
+            buttonSelectActionCancel.Enabled = false;
+            textBoxTime.Text = "";
+            labelTime.Enabled = false;
+            textBoxTime.Enabled = false;
+            buttonAddThread1.Enabled = false;
+            buttonAddThread2.Enabled = false;
+            buttonAddThread3.Enabled = false;
+        }
+
         private int getTypeOfAction()
         {
-            string s = treeViewActionSelecter.SelectedNode.Text;
             switch (treeViewActionSelecter.SelectedNode.Text)
             {
                 case "Клапан соли": return 0;

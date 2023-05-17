@@ -35,7 +35,7 @@
             dataGridView3 = new DataGridView();
             labelTitleThread1 = new Label();
             labelTitleThread2 = new Label();
-            label1 = new Label();
+            labelTitleThread3 = new Label();
             buttonAddThread1 = new Button();
             buttonAddThread2 = new Button();
             buttonAddThread3 = new Button();
@@ -53,9 +53,16 @@
             buttonEditThread1 = new Button();
             buttonEditThread2 = new Button();
             buttonEditThread3 = new Button();
+            buttonSelectActionCancel = new Button();
+            groupBoxAddAction = new GroupBox();
+            textBoxTime = new TextBox();
+            labelTime = new Label();
+            labelSelectedAction = new Label();
+            groupBoxEditAction = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            groupBoxAddAction.SuspendLayout();
             SuspendLayout();
             // 
             // treeViewActionSelecter
@@ -68,9 +75,9 @@
             // 
             // buttonSelectAction
             // 
-            buttonSelectAction.Location = new Point(292, 27);
+            buttonSelectAction.Location = new Point(6, 22);
             buttonSelectAction.Name = "buttonSelectAction";
-            buttonSelectAction.Size = new Size(183, 23);
+            buttonSelectAction.Size = new Size(171, 23);
             buttonSelectAction.TabIndex = 1;
             buttonSelectAction.Text = "Выбрать";
             buttonSelectAction.UseVisualStyleBackColor = true;
@@ -82,6 +89,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(481, 27);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 25;
@@ -94,6 +102,7 @@
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(730, 27);
+            dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
             dataGridView2.ReadOnly = true;
             dataGridView2.RowTemplate.Height = 25;
@@ -106,6 +115,7 @@
             dataGridView3.AllowUserToDeleteRows = false;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView3.Location = new Point(979, 27);
+            dataGridView3.MultiSelect = false;
             dataGridView3.Name = "dataGridView3";
             dataGridView3.ReadOnly = true;
             dataGridView3.RowTemplate.Height = 25;
@@ -130,17 +140,18 @@
             labelTitleThread2.TabIndex = 6;
             labelTitleThread2.Text = "2. Второй поток";
             // 
-            // label1
+            // labelTitleThread3
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(979, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(92, 15);
-            label1.TabIndex = 7;
-            label1.Text = "3. Третий поток";
+            labelTitleThread3.AutoSize = true;
+            labelTitleThread3.Location = new Point(979, 9);
+            labelTitleThread3.Name = "labelTitleThread3";
+            labelTitleThread3.Size = new Size(92, 15);
+            labelTitleThread3.TabIndex = 7;
+            labelTitleThread3.Text = "3. Третий поток";
             // 
             // buttonAddThread1
             // 
+            buttonAddThread1.Enabled = false;
             buttonAddThread1.Location = new Point(481, 526);
             buttonAddThread1.Name = "buttonAddThread1";
             buttonAddThread1.Size = new Size(243, 23);
@@ -150,6 +161,7 @@
             // 
             // buttonAddThread2
             // 
+            buttonAddThread2.Enabled = false;
             buttonAddThread2.Location = new Point(730, 526);
             buttonAddThread2.Name = "buttonAddThread2";
             buttonAddThread2.Size = new Size(243, 23);
@@ -159,6 +171,7 @@
             // 
             // buttonAddThread3
             // 
+            buttonAddThread3.Enabled = false;
             buttonAddThread3.Location = new Point(979, 526);
             buttonAddThread3.Name = "buttonAddThread3";
             buttonAddThread3.Size = new Size(243, 23);
@@ -168,7 +181,8 @@
             // 
             // buttonDelThread1
             // 
-            buttonDelThread1.Location = new Point(481, 556);
+            buttonDelThread1.Enabled = false;
+            buttonDelThread1.Location = new Point(481, 555);
             buttonDelThread1.Name = "buttonDelThread1";
             buttonDelThread1.Size = new Size(243, 23);
             buttonDelThread1.TabIndex = 11;
@@ -177,6 +191,7 @@
             // 
             // buttonDelThread2
             // 
+            buttonDelThread2.Enabled = false;
             buttonDelThread2.Location = new Point(730, 555);
             buttonDelThread2.Name = "buttonDelThread2";
             buttonDelThread2.Size = new Size(243, 23);
@@ -186,6 +201,7 @@
             // 
             // buttonDelThread3
             // 
+            buttonDelThread3.Enabled = false;
             buttonDelThread3.Location = new Point(979, 555);
             buttonDelThread3.Name = "buttonDelThread3";
             buttonDelThread3.Size = new Size(243, 23);
@@ -275,7 +291,8 @@
             // 
             // buttonEditThread1
             // 
-            buttonEditThread1.Location = new Point(481, 585);
+            buttonEditThread1.Enabled = false;
+            buttonEditThread1.Location = new Point(481, 584);
             buttonEditThread1.Name = "buttonEditThread1";
             buttonEditThread1.Size = new Size(243, 23);
             buttonEditThread1.TabIndex = 22;
@@ -284,6 +301,7 @@
             // 
             // buttonEditThread2
             // 
+            buttonEditThread2.Enabled = false;
             buttonEditThread2.Location = new Point(730, 584);
             buttonEditThread2.Name = "buttonEditThread2";
             buttonEditThread2.Size = new Size(243, 23);
@@ -293,12 +311,73 @@
             // 
             // buttonEditThread3
             // 
-            buttonEditThread3.Location = new Point(979, 585);
+            buttonEditThread3.Enabled = false;
+            buttonEditThread3.Location = new Point(979, 584);
             buttonEditThread3.Name = "buttonEditThread3";
             buttonEditThread3.Size = new Size(243, 23);
             buttonEditThread3.TabIndex = 24;
             buttonEditThread3.Text = "Изменить выделенное";
             buttonEditThread3.UseVisualStyleBackColor = true;
+            // 
+            // buttonSelectActionCancel
+            // 
+            buttonSelectActionCancel.Enabled = false;
+            buttonSelectActionCancel.Location = new Point(6, 114);
+            buttonSelectActionCancel.Name = "buttonSelectActionCancel";
+            buttonSelectActionCancel.Size = new Size(171, 23);
+            buttonSelectActionCancel.TabIndex = 25;
+            buttonSelectActionCancel.Text = "Отмена";
+            buttonSelectActionCancel.UseVisualStyleBackColor = true;
+            buttonSelectActionCancel.Click += buttonSelectActionCancel_Click;
+            // 
+            // groupBoxAddAction
+            // 
+            groupBoxAddAction.Controls.Add(textBoxTime);
+            groupBoxAddAction.Controls.Add(labelTime);
+            groupBoxAddAction.Controls.Add(labelSelectedAction);
+            groupBoxAddAction.Controls.Add(buttonSelectAction);
+            groupBoxAddAction.Controls.Add(buttonSelectActionCancel);
+            groupBoxAddAction.Location = new Point(292, 12);
+            groupBoxAddAction.Name = "groupBoxAddAction";
+            groupBoxAddAction.Size = new Size(183, 145);
+            groupBoxAddAction.TabIndex = 26;
+            groupBoxAddAction.TabStop = false;
+            groupBoxAddAction.Text = "Добавить действие";
+            // 
+            // textBoxTime
+            // 
+            textBoxTime.Enabled = false;
+            textBoxTime.Location = new Point(57, 85);
+            textBoxTime.Name = "textBoxTime";
+            textBoxTime.Size = new Size(120, 23);
+            textBoxTime.TabIndex = 28;
+            // 
+            // labelTime
+            // 
+            labelTime.AutoSize = true;
+            labelTime.Enabled = false;
+            labelTime.Location = new Point(6, 88);
+            labelTime.Name = "labelTime";
+            labelTime.Size = new Size(45, 15);
+            labelTime.TabIndex = 27;
+            labelTime.Text = "Время:";
+            // 
+            // labelSelectedAction
+            // 
+            labelSelectedAction.Location = new Point(6, 48);
+            labelSelectedAction.Name = "labelSelectedAction";
+            labelSelectedAction.Size = new Size(171, 34);
+            labelSelectedAction.TabIndex = 26;
+            labelSelectedAction.Text = "Действие не выбрано";
+            // 
+            // groupBoxEditAction
+            // 
+            groupBoxEditAction.Location = new Point(292, 379);
+            groupBoxEditAction.Name = "groupBoxEditAction";
+            groupBoxEditAction.Size = new Size(183, 141);
+            groupBoxEditAction.TabIndex = 27;
+            groupBoxEditAction.TabStop = false;
+            groupBoxEditAction.Text = "Изменить действие";
             // 
             // Form1
             // 
@@ -306,6 +385,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1234, 661);
+            Controls.Add(groupBoxEditAction);
+            Controls.Add(groupBoxAddAction);
             Controls.Add(buttonEditThread3);
             Controls.Add(buttonEditThread2);
             Controls.Add(buttonEditThread1);
@@ -323,20 +404,23 @@
             Controls.Add(buttonAddThread3);
             Controls.Add(buttonAddThread2);
             Controls.Add(buttonAddThread1);
-            Controls.Add(label1);
+            Controls.Add(labelTitleThread3);
             Controls.Add(labelTitleThread2);
             Controls.Add(labelTitleThread1);
             Controls.Add(dataGridView3);
             Controls.Add(dataGridView2);
             Controls.Add(dataGridView1);
-            Controls.Add(buttonSelectAction);
             Controls.Add(treeViewActionSelecter);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Конфигуратор посудомойки";
             FormClosing += Form1_FormClosing;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            groupBoxAddAction.ResumeLayout(false);
+            groupBoxAddAction.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -350,7 +434,7 @@
         private DataGridView dataGridView3;
         private Label labelTitleThread1;
         private Label labelTitleThread2;
-        private Label label1;
+        private Label labelTitleThread3;
         private Button buttonAddThread1;
         private Button buttonAddThread2;
         private Button buttonAddThread3;
@@ -368,5 +452,11 @@
         private Button buttonEditThread1;
         private Button buttonEditThread2;
         private Button buttonEditThread3;
+        private Button buttonSelectActionCancel;
+        private GroupBox groupBoxAddAction;
+        private GroupBox groupBoxEditAction;
+        private Label labelSelectedAction;
+        private Label labelTime;
+        private TextBox textBoxTime;
     }
 }
