@@ -347,9 +347,9 @@
             // textBoxTime
             // 
             textBoxTime.Enabled = false;
-            textBoxTime.Location = new Point(57, 85);
+            textBoxTime.Location = new Point(74, 85);
             textBoxTime.Name = "textBoxTime";
-            textBoxTime.Size = new Size(120, 23);
+            textBoxTime.Size = new Size(103, 23);
             textBoxTime.TabIndex = 28;
             // 
             // labelTime
@@ -358,9 +358,9 @@
             labelTime.Enabled = false;
             labelTime.Location = new Point(6, 88);
             labelTime.Name = "labelTime";
-            labelTime.Size = new Size(45, 15);
+            labelTime.Size = new Size(62, 15);
             labelTime.TabIndex = 27;
-            labelTime.Text = "Время:";
+            labelTime.Text = "Время (с):";
             // 
             // labelSelectedAction
             // 
