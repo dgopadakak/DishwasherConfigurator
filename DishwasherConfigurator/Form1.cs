@@ -43,7 +43,37 @@ namespace DishwasherConfigurator
 
         private void buttonSelectAction_Click(object sender, EventArgs e)
         {
+            int type = getTypeOfAction();
+            if (type != -1)
+            {
+                /////////////////////////////////////////////////////////////////////////////////
+            }
+            else
+            {
+                MessageBox.Show("Выберете действие!");
+            }
+        }
 
+        private int getTypeOfAction()
+        {
+            string s = treeViewActionSelecter.SelectedNode.Text;
+            switch (treeViewActionSelecter.SelectedNode.Text)
+            {
+                case "Клапан соли": return 0;
+                case "Пропуск по времени": return 1;
+                case "Пропуск до срабатывания прессостата": return 2;
+                case "Пропуск до конца работы прессостата": return 3;
+                case "Набор до прессостата": return 4;
+                case "Набор по времени": return 5;
+                case "Слив до прессостата": return 6;
+                case "Слив по времени": return 7;
+                case "Основная помпа по времени": return 8;
+                case "Тэн по времени": return 9;
+                case "Выброс таблетки": return 10;
+                case "Выброс ополаскивателя по времени": return 11;
+                case "Вентилятор по времени": return 12;
+            }
+            return -1;
         }
 
         #region Работа с COM-портом

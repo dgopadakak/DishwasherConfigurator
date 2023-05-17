@@ -57,6 +57,7 @@
             // 
             // treeViewActionSelecter
             // 
+            treeViewActionSelecter.HideSelection = false;
             treeViewActionSelecter.Location = new Point(12, 12);
             treeViewActionSelecter.Name = "treeViewActionSelecter";
             treeViewActionSelecter.Size = new Size(274, 537);
