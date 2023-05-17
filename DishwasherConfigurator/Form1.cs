@@ -22,15 +22,19 @@ namespace DishwasherConfigurator
             treeViewActionSelecter.Nodes.Add("Слив воды");
             treeViewActionSelecter.Nodes.Add("Мойка");
             treeViewActionSelecter.Nodes.Add("Сушка");
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли");                   // type: 0
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск времени");               // type: 1
-            treeViewActionSelecter.Nodes[1].Nodes.Add("Набор до прессостата");          // type: 2
-            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив до прессостата");           // type: 3
-            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив по времени");               // type: 4
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Основная помпа по времени");     // type: 5
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Тэн по времени");                // type: 6
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Выброс таблетки");               // type: 7
-            treeViewActionSelecter.Nodes[4].Nodes.Add("Вентилятор по времени");         // type: 8
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли");                               // type: 0
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск по времени");                        // type: 1
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до срабатывания прессостата");       // type: 2
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до конца работы прессостата");       // type: 3
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Набор до прессостата");                      // type: 4
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Набор по времени");                          // type: 5
+            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив до прессостата");                       // type: 6
+            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив по времени");                           // type: 7
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Основная помпа по времени");                 // type: 8
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Тэн по времени");                            // type: 9
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Выброс таблетки");                           // type: 10
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Выброс ополаскивателя по времени");          // type: 11
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Вентилятор по времени");                     // type: 12
             treeViewActionSelecter.EndUpdate();                                         // Конец настройки
             treeViewActionSelecter.ExpandAll();                                         // Развернуть все в дереве
 

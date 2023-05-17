@@ -48,6 +48,8 @@
             buttonCancelCom = new Button();
             buttonSendProgramByCom = new Button();
             buttonReadProgramByCom = new Button();
+            buttonReadProgramFromFile = new Button();
+            buttonWriteProgramToFile = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -249,12 +251,32 @@
             buttonReadProgramByCom.UseVisualStyleBackColor = true;
             buttonReadProgramByCom.Click += buttonReadProgramByCom_Click;
             // 
+            // buttonReadProgramFromFile
+            // 
+            buttonReadProgramFromFile.Location = new Point(981, 626);
+            buttonReadProgramFromFile.Name = "buttonReadProgramFromFile";
+            buttonReadProgramFromFile.Size = new Size(191, 23);
+            buttonReadProgramFromFile.TabIndex = 20;
+            buttonReadProgramFromFile.Text = "Открыть программу из файла";
+            buttonReadProgramFromFile.UseVisualStyleBackColor = true;
+            // 
+            // buttonWriteProgramToFile
+            // 
+            buttonWriteProgramToFile.Location = new Point(784, 626);
+            buttonWriteProgramToFile.Name = "buttonWriteProgramToFile";
+            buttonWriteProgramToFile.Size = new Size(191, 23);
+            buttonWriteProgramToFile.TabIndex = 21;
+            buttonWriteProgramToFile.Text = "Сохранить программу в файл";
+            buttonWriteProgramToFile.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1184, 661);
+            Controls.Add(buttonWriteProgramToFile);
+            Controls.Add(buttonReadProgramFromFile);
             Controls.Add(buttonReadProgramByCom);
             Controls.Add(buttonSendProgramByCom);
             Controls.Add(buttonCancelCom);
@@ -307,5 +329,7 @@
         private Button buttonCancelCom;
         private Button buttonSendProgramByCom;
         private Button buttonReadProgramByCom;
+        private Button buttonReadProgramFromFile;
+        private Button buttonWriteProgramToFile;
     }
 }
