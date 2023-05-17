@@ -50,6 +50,9 @@
             buttonReadProgramByCom = new Button();
             buttonReadProgramFromFile = new Button();
             buttonWriteProgramToFile = new Button();
+            buttonEditThread1 = new Button();
+            buttonEditThread2 = new Button();
+            buttonEditThread3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -65,9 +68,9 @@
             // 
             // buttonSelectAction
             // 
-            buttonSelectAction.Location = new Point(291, 173);
+            buttonSelectAction.Location = new Point(292, 27);
             buttonSelectAction.Name = "buttonSelectAction";
-            buttonSelectAction.Size = new Size(134, 23);
+            buttonSelectAction.Size = new Size(183, 23);
             buttonSelectAction.TabIndex = 1;
             buttonSelectAction.Text = "Выбрать";
             buttonSelectAction.UseVisualStyleBackColor = true;
@@ -78,7 +81,7 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(431, 27);
+            dataGridView1.Location = new Point(481, 27);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowTemplate.Height = 25;
@@ -90,7 +93,7 @@
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(680, 27);
+            dataGridView2.Location = new Point(730, 27);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.ReadOnly = true;
             dataGridView2.RowTemplate.Height = 25;
@@ -102,7 +105,7 @@
             dataGridView3.AllowUserToAddRows = false;
             dataGridView3.AllowUserToDeleteRows = false;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(929, 27);
+            dataGridView3.Location = new Point(979, 27);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.ReadOnly = true;
             dataGridView3.RowTemplate.Height = 25;
@@ -112,7 +115,7 @@
             // labelTitleThread1
             // 
             labelTitleThread1.AutoSize = true;
-            labelTitleThread1.Location = new Point(431, 9);
+            labelTitleThread1.Location = new Point(481, 9);
             labelTitleThread1.Name = "labelTitleThread1";
             labelTitleThread1.Size = new Size(98, 15);
             labelTitleThread1.TabIndex = 5;
@@ -121,7 +124,7 @@
             // labelTitleThread2
             // 
             labelTitleThread2.AutoSize = true;
-            labelTitleThread2.Location = new Point(680, 9);
+            labelTitleThread2.Location = new Point(730, 9);
             labelTitleThread2.Name = "labelTitleThread2";
             labelTitleThread2.Size = new Size(94, 15);
             labelTitleThread2.TabIndex = 6;
@@ -130,7 +133,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(929, 9);
+            label1.Location = new Point(979, 9);
             label1.Name = "label1";
             label1.Size = new Size(92, 15);
             label1.TabIndex = 7;
@@ -138,7 +141,7 @@
             // 
             // buttonAddThread1
             // 
-            buttonAddThread1.Location = new Point(431, 526);
+            buttonAddThread1.Location = new Point(481, 526);
             buttonAddThread1.Name = "buttonAddThread1";
             buttonAddThread1.Size = new Size(243, 23);
             buttonAddThread1.TabIndex = 8;
@@ -147,7 +150,7 @@
             // 
             // buttonAddThread2
             // 
-            buttonAddThread2.Location = new Point(680, 526);
+            buttonAddThread2.Location = new Point(730, 526);
             buttonAddThread2.Name = "buttonAddThread2";
             buttonAddThread2.Size = new Size(243, 23);
             buttonAddThread2.TabIndex = 9;
@@ -156,7 +159,7 @@
             // 
             // buttonAddThread3
             // 
-            buttonAddThread3.Location = new Point(929, 526);
+            buttonAddThread3.Location = new Point(979, 526);
             buttonAddThread3.Name = "buttonAddThread3";
             buttonAddThread3.Size = new Size(243, 23);
             buttonAddThread3.TabIndex = 10;
@@ -165,7 +168,7 @@
             // 
             // buttonDelThread1
             // 
-            buttonDelThread1.Location = new Point(431, 555);
+            buttonDelThread1.Location = new Point(481, 556);
             buttonDelThread1.Name = "buttonDelThread1";
             buttonDelThread1.Size = new Size(243, 23);
             buttonDelThread1.TabIndex = 11;
@@ -174,7 +177,7 @@
             // 
             // buttonDelThread2
             // 
-            buttonDelThread2.Location = new Point(680, 555);
+            buttonDelThread2.Location = new Point(730, 555);
             buttonDelThread2.Name = "buttonDelThread2";
             buttonDelThread2.Size = new Size(243, 23);
             buttonDelThread2.TabIndex = 12;
@@ -183,7 +186,7 @@
             // 
             // buttonDelThread3
             // 
-            buttonDelThread3.Location = new Point(929, 555);
+            buttonDelThread3.Location = new Point(979, 555);
             buttonDelThread3.Name = "buttonDelThread3";
             buttonDelThread3.Size = new Size(243, 23);
             buttonDelThread3.TabIndex = 13;
@@ -254,7 +257,7 @@
             // 
             // buttonReadProgramFromFile
             // 
-            buttonReadProgramFromFile.Location = new Point(981, 626);
+            buttonReadProgramFromFile.Location = new Point(1031, 626);
             buttonReadProgramFromFile.Name = "buttonReadProgramFromFile";
             buttonReadProgramFromFile.Size = new Size(191, 23);
             buttonReadProgramFromFile.TabIndex = 20;
@@ -263,19 +266,49 @@
             // 
             // buttonWriteProgramToFile
             // 
-            buttonWriteProgramToFile.Location = new Point(784, 626);
+            buttonWriteProgramToFile.Location = new Point(834, 626);
             buttonWriteProgramToFile.Name = "buttonWriteProgramToFile";
             buttonWriteProgramToFile.Size = new Size(191, 23);
             buttonWriteProgramToFile.TabIndex = 21;
             buttonWriteProgramToFile.Text = "Сохранить программу в файл";
             buttonWriteProgramToFile.UseVisualStyleBackColor = true;
             // 
+            // buttonEditThread1
+            // 
+            buttonEditThread1.Location = new Point(481, 585);
+            buttonEditThread1.Name = "buttonEditThread1";
+            buttonEditThread1.Size = new Size(243, 23);
+            buttonEditThread1.TabIndex = 22;
+            buttonEditThread1.Text = "Изменить выделенное";
+            buttonEditThread1.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditThread2
+            // 
+            buttonEditThread2.Location = new Point(730, 584);
+            buttonEditThread2.Name = "buttonEditThread2";
+            buttonEditThread2.Size = new Size(243, 23);
+            buttonEditThread2.TabIndex = 23;
+            buttonEditThread2.Text = "Изменить выделенное";
+            buttonEditThread2.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditThread3
+            // 
+            buttonEditThread3.Location = new Point(979, 585);
+            buttonEditThread3.Name = "buttonEditThread3";
+            buttonEditThread3.Size = new Size(243, 23);
+            buttonEditThread3.TabIndex = 24;
+            buttonEditThread3.Text = "Изменить выделенное";
+            buttonEditThread3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1184, 661);
+            ClientSize = new Size(1234, 661);
+            Controls.Add(buttonEditThread3);
+            Controls.Add(buttonEditThread2);
+            Controls.Add(buttonEditThread1);
             Controls.Add(buttonWriteProgramToFile);
             Controls.Add(buttonReadProgramFromFile);
             Controls.Add(buttonReadProgramByCom);
@@ -332,5 +365,8 @@
         private Button buttonReadProgramByCom;
         private Button buttonReadProgramFromFile;
         private Button buttonWriteProgramToFile;
+        private Button buttonEditThread1;
+        private Button buttonEditThread2;
+        private Button buttonEditThread3;
     }
 }

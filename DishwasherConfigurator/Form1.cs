@@ -46,7 +46,15 @@ namespace DishwasherConfigurator
             int type = getTypeOfAction();
             if (type != -1)
             {
-                /////////////////////////////////////////////////////////////////////////////////
+                int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+                if (typesOfTimeBasedActions.Contains(type))
+                {
+                    ///////////////////////////////////////////////////////////////////////////
+                }
+                else
+                {
+                    ///////////////////////////////////////////////////////////////////////////
+                }
             }
             else
             {
