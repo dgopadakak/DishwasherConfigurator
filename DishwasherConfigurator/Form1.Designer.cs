@@ -47,6 +47,7 @@
             buttonAcceptCom = new Button();
             buttonCancelCom = new Button();
             buttonSendProgramByCom = new Button();
+            buttonReadProgramByCom = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -231,11 +232,22 @@
             buttonSendProgramByCom.Enabled = false;
             buttonSendProgramByCom.Location = new Point(12, 614);
             buttonSendProgramByCom.Name = "buttonSendProgramByCom";
-            buttonSendProgramByCom.Size = new Size(274, 23);
+            buttonSendProgramByCom.Size = new Size(134, 23);
             buttonSendProgramByCom.TabIndex = 18;
             buttonSendProgramByCom.Text = "Залить прошивку";
             buttonSendProgramByCom.UseVisualStyleBackColor = true;
             buttonSendProgramByCom.Click += buttonSendProgramByCom_Click;
+            // 
+            // buttonReadProgramByCom
+            // 
+            buttonReadProgramByCom.Enabled = false;
+            buttonReadProgramByCom.Location = new Point(152, 614);
+            buttonReadProgramByCom.Name = "buttonReadProgramByCom";
+            buttonReadProgramByCom.Size = new Size(134, 23);
+            buttonReadProgramByCom.TabIndex = 19;
+            buttonReadProgramByCom.Text = "Прочитать прошивку";
+            buttonReadProgramByCom.UseVisualStyleBackColor = true;
+            buttonReadProgramByCom.Click += buttonReadProgramByCom_Click;
             // 
             // Form1
             // 
@@ -243,6 +255,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1184, 661);
+            Controls.Add(buttonReadProgramByCom);
             Controls.Add(buttonSendProgramByCom);
             Controls.Add(buttonCancelCom);
             Controls.Add(buttonAcceptCom);
@@ -293,5 +306,6 @@
         private Button buttonAcceptCom;
         private Button buttonCancelCom;
         private Button buttonSendProgramByCom;
+        private Button buttonReadProgramByCom;
     }
 }

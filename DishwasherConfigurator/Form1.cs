@@ -66,6 +66,7 @@ namespace DishwasherConfigurator
                     buttonAcceptCom.Enabled = false;
                     buttonCancelCom.Enabled = true;
                     buttonSendProgramByCom.Enabled = true;
+                    buttonReadProgramByCom.Enabled = true;
                 }
                 catch
                 {
@@ -117,9 +118,15 @@ namespace DishwasherConfigurator
             buttonAcceptCom.Enabled = true;
             buttonCancelCom.Enabled = false;
             buttonSendProgramByCom.Enabled = false;
+            buttonReadProgramByCom.Enabled = false;
         }
 
         private void buttonSendProgramByCom_Click(object sender, EventArgs e)
+        {
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
+
+        private void buttonReadProgramByCom_Click(object sender, EventArgs e)
         {
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
         }
