@@ -12,6 +12,8 @@ namespace DishwasherConfigurator
 
         private string inString = "";
 
+        private int typeOfSelectedAction = -1;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,8 +47,8 @@ namespace DishwasherConfigurator
 
         private void buttonSelectAction_Click(object sender, EventArgs e)
         {
-            int type = getTypeOfAction();
-            if (type != -1)
+            typeOfSelectedAction = getTypeOfAction();
+            if (typeOfSelectedAction != -1)
             {
                 buttonSelectActionCancel.Enabled = true;
                 buttonAddThread1.Enabled = true;
@@ -55,7 +57,7 @@ namespace DishwasherConfigurator
 
                 labelSelectedAction.Text = "Выбрано действие: " + treeViewActionSelecter.SelectedNode.Text;
                 int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
-                if (typesOfTimeBasedActions.Contains(type))
+                if (typesOfTimeBasedActions.Contains(typeOfSelectedAction))
                 {
                     labelTime.Enabled = true;
                     textBoxTime.Enabled = true;
@@ -107,6 +109,8 @@ namespace DishwasherConfigurator
         }
 
         #endregion
+
+        // TODO: Сделать обработку добавления действия
 
         #region Работа с COM-портом
 
