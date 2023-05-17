@@ -41,6 +41,8 @@ namespace DishwasherConfigurator
             updateComPorts();
         }
 
+        #region Обработка выбора действия
+
         private void buttonSelectAction_Click(object sender, EventArgs e)
         {
             int type = getTypeOfAction();
@@ -103,6 +105,8 @@ namespace DishwasherConfigurator
             }
             return -1;
         }
+
+        #endregion
 
         #region Работа с COM-портом
 
