@@ -207,27 +207,6 @@ namespace DishwasherConfigurator
             }
         }
 
-        private string getActionNameByType(int type)
-        {
-            switch (type)
-            {
-                case 0: return "Клапан соли";
-                case 1: return "Пропуск по времени";
-                case 2: return "Пропуск до сраб. пресс.";
-                case 3: return "Пропуск до к. р. пресс.";
-                case 4: return "Набор до пресс.";
-                case 5: return "Набор по времени";
-                case 6: return "Слив до пресс.";
-                case 7: return "Слив по времени";
-                case 8: return "Основная помпа";
-                case 9: return "Тэн";
-                case 10: return "Таблетка";
-                case 11: return "Ополаскиватель";
-                case 12: return "Вентилятор";
-            }
-            return "";
-        }
-
         private int getTime()
         {
             try
@@ -349,6 +328,8 @@ namespace DishwasherConfigurator
 
         #endregion
 
+        #region Сохранение в файл и чтение из него
+
         private void buttonWriteProgramToFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
@@ -362,8 +343,18 @@ namespace DishwasherConfigurator
 
         private void buttonReadProgramFromFile_Click(object sender, EventArgs e)
         {
-            ////////////////////////////////////////////////////////////////////////
+            OpenFileDialog oOpenFileDialog = new OpenFileDialog();
+            oOpenFileDialog.Filter = "Text files(*.txt)|*.txt";
+            if (oOpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = oOpenFileDialog.FileName;
+                readDishwasherProgram(File.ReadAllText(fileName));
+            }
         }
+
+        #endregion
+
+        #region Превращение программы в строку и обратно
 
         private string compilateDishwasherProgram()
         {
@@ -382,13 +373,133 @@ namespace DishwasherConfigurator
             {
                 s += actionThread3[i].getType() + ";" + actionThread3[i].getTime() + "$";
             }
-            s += "@#";
+            s += "@#program#";
             return s;
         }
 
         private void readDishwasherProgram(string s)
         {
-            ////////////////////////////////////////////////////////////////////////////////
+            if (s.IndexOf("@#program#") > 0)
+            {
+                try
+                {
+                    actionThread1.Clear();
+                    actionThread2.Clear();
+                    actionThread3.Clear();
+                    dataGridView1.Rows.Clear();
+                    dataGridView2.Rows.Clear();
+                    dataGridView3.Rows.Clear();
+
+                    string nums = s.Substring(0, s.IndexOf("@"));
+                    s = s.Substring(s.IndexOf("@") + 1);
+
+                    int n1 = Int32.Parse(nums.Substring(0, nums.IndexOf("$")));
+                    nums = nums.Substring(nums.IndexOf("$") + 1);
+                    int n2 = Int32.Parse(nums.Substring(0, nums.IndexOf("$")));
+                    nums = nums.Substring(nums.IndexOf("$") + 1);
+                    int n3 = Int32.Parse(nums.Substring(0, nums.IndexOf("$")));
+
+                    string thread1 = s.Substring(0, s.IndexOf("@"));
+                    s = s.Substring(s.IndexOf("@") + 1);
+                    for (int i = 0; i < n1; i++)
+                    {
+                        string tempAction = thread1.Substring(0, thread1.IndexOf("$"));
+                        thread1 = thread1.Substring(thread1.IndexOf("$") + 1);
+                        int type = Int32.Parse(tempAction.Substring(0, tempAction.IndexOf(";")));
+                        tempAction = tempAction.Substring(tempAction.IndexOf(";") + 1);
+                        int time = Int32.Parse(tempAction);
+                        actionThread1.Add(new DishAction(type, time));
+                    }
+                    string thread2 = s.Substring(0, s.IndexOf("@"));
+                    s = s.Substring(s.IndexOf("@") + 1);
+                    for (int i = 0; i < n2; i++)
+                    {
+                        string tempAction = thread2.Substring(0, thread2.IndexOf("$"));
+                        thread2 = thread2.Substring(thread2.IndexOf("$") + 1);
+                        int type = Int32.Parse(tempAction.Substring(0, tempAction.IndexOf(";")));
+                        tempAction = tempAction.Substring(tempAction.IndexOf(";") + 1);
+                        int time = Int32.Parse(tempAction);
+                        actionThread2.Add(new DishAction(type, time));
+                    }
+                    string thread3 = s.Substring(0, s.IndexOf("@"));
+                    for (int i = 0; i < n3; i++)
+                    {
+                        string tempAction = thread3.Substring(0, thread3.IndexOf("$"));
+                        thread3 = thread3.Substring(thread3.IndexOf("$") + 1);
+                        int type = Int32.Parse(tempAction.Substring(0, tempAction.IndexOf(";")));
+                        tempAction = tempAction.Substring(tempAction.IndexOf(";") + 1);
+                        int time = Int32.Parse(tempAction);
+                        actionThread3.Add(new DishAction(type, time));
+                    }
+                    for (int i = 0; i < actionThread1.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        dataGridView1.Rows.Add(tempRow);
+                    }
+                    for (int i = 0; i < actionThread2.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        dataGridView2.Rows.Add(tempRow);
+                    }
+                    for (int i = 0; i < actionThread3.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        dataGridView3.Rows.Add(tempRow);
+                    }
+                    if (actionThread1.Count > 0)
+                    {
+                        buttonDelThread1.Enabled = true;
+                        buttonEditThread1.Enabled = true;
+                    }
+                    if (actionThread2.Count > 0)
+                    {
+                        buttonDelThread2.Enabled = true;
+                        buttonEditThread2.Enabled = true;
+                    }
+                    if (actionThread3.Count > 0)
+                    {
+                        buttonDelThread3.Enabled = true;
+                        buttonEditThread3.Enabled = true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("На вход поступил файл правильной конфигурации, но программа в нем повреждена! Попробуйте снова.");
+                    actionThread1.Clear();
+                    actionThread2.Clear();
+                    actionThread3.Clear();
+                    dataGridView1.Rows.Clear();
+                    dataGridView2.Rows.Clear();
+                    dataGridView3.Rows.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("На вход поступил файл неправильной конфигурации! Вероятнее всего это не программа.");
+            }
+        }
+
+        #endregion
+
+        private string getActionNameByType(int type)
+        {
+            switch (type)
+            {
+                case 0: return "Клапан соли";
+                case 1: return "Пропуск по времени";
+                case 2: return "Пропуск до сраб. пресс.";
+                case 3: return "Пропуск до к. р. пресс.";
+                case 4: return "Набор до пресс.";
+                case 5: return "Набор по времени";
+                case 6: return "Слив до пресс.";
+                case 7: return "Слив по времени";
+                case 8: return "Основная помпа";
+                case 9: return "Тэн";
+                case 10: return "Таблетка";
+                case 11: return "Ополаскиватель";
+                case 12: return "Вентилятор";
+            }
+            return "";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
