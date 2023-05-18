@@ -390,6 +390,7 @@
             buttonReadProgramFromFile.TabIndex = 20;
             buttonReadProgramFromFile.Text = "Открыть программу из файла";
             buttonReadProgramFromFile.UseVisualStyleBackColor = true;
+            buttonReadProgramFromFile.Click += buttonReadProgramFromFile_Click;
             // 
             // buttonWriteProgramToFile
             // 
@@ -399,6 +400,7 @@
             buttonWriteProgramToFile.TabIndex = 21;
             buttonWriteProgramToFile.Text = "Сохранить программу в файл";
             buttonWriteProgramToFile.UseVisualStyleBackColor = true;
+            buttonWriteProgramToFile.Click += buttonWriteProgramToFile_Click;
             // 
             // buttonEditThread1
             // 

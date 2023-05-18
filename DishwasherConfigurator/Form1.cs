@@ -1,4 +1,6 @@
 using System.IO.Ports;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DishwasherConfigurator
 {
@@ -346,6 +348,48 @@ namespace DishwasherConfigurator
         }
 
         #endregion
+
+        private void buttonWriteProgramToFile_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog oSaveFileDialog = new SaveFileDialog();
+            oSaveFileDialog.Filter = "Text files(*.txt)|*.txt";
+            if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fileName = oSaveFileDialog.FileName;
+                File.WriteAllText(fileName, compilateDishwasherProgram());
+            }
+        }
+
+        private void buttonReadProgramFromFile_Click(object sender, EventArgs e)
+        {
+            ////////////////////////////////////////////////////////////////////////
+        }
+
+        private string compilateDishwasherProgram()
+        {
+            string s = actionThread1.Count + "$" + actionThread2.Count + "$" + actionThread3.Count + "$@";
+            for (int i = 0; i < actionThread1.Count; i++)
+            {
+                s += actionThread1[i].getType() + ";" + actionThread1[i].getTime() + "$";
+            }
+            s += "@";
+            for (int i = 0; i < actionThread2.Count; i++)
+            {
+                s += actionThread2[i].getType() + ";" + actionThread2[i].getTime() + "$";
+            }
+            s += "@";
+            for (int i = 0; i < actionThread3.Count; i++)
+            {
+                s += actionThread3[i].getType() + ";" + actionThread3[i].getTime() + "$";
+            }
+            s += "@#";
+            return s;
+        }
+
+        private void readDishwasherProgram(string s)
+        {
+            ////////////////////////////////////////////////////////////////////////////////
+        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
