@@ -245,8 +245,6 @@ namespace DishwasherConfigurator
 
         #endregion
 
-        // TODO: расширить окно
-
         #region Работа с COM-портом
 
         private void buttonUpdateComPorts_Click(object sender, EventArgs e)
