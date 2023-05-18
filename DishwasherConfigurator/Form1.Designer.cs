@@ -31,8 +31,17 @@
             treeViewActionSelecter = new TreeView();
             buttonSelectAction = new Button();
             dataGridView1 = new DataGridView();
+            Column1 = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
             dataGridView2 = new DataGridView();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
             dataGridView3 = new DataGridView();
+            Column7 = new DataGridViewTextBoxColumn();
+            Column8 = new DataGridViewTextBoxColumn();
+            Column9 = new DataGridViewTextBoxColumn();
             labelTitleThread1 = new Label();
             labelTitleThread2 = new Label();
             labelTitleThread3 = new Label();
@@ -88,39 +97,129 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
             dataGridView1.Location = new Point(481, 27);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.Size = new Size(243, 493);
             dataGridView1.TabIndex = 2;
+            // 
+            // Column1
+            // 
+            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column1.HeaderText = "№";
+            Column1.Name = "Column1";
+            Column1.ReadOnly = true;
+            Column1.Resizable = DataGridViewTriState.False;
+            Column1.Width = 45;
+            // 
+            // Column2
+            // 
+            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column2.HeaderText = "Название";
+            Column2.Name = "Column2";
+            Column2.ReadOnly = true;
+            Column2.Resizable = DataGridViewTriState.False;
+            Column2.Width = 84;
+            // 
+            // Column3
+            // 
+            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column3.HeaderText = "Время";
+            Column3.Name = "Column3";
+            Column3.ReadOnly = true;
+            Column3.Resizable = DataGridViewTriState.False;
+            Column3.Width = 67;
             // 
             // dataGridView2
             // 
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column4, Column5, Column6 });
             dataGridView2.Location = new Point(730, 27);
             dataGridView2.MultiSelect = false;
             dataGridView2.Name = "dataGridView2";
             dataGridView2.ReadOnly = true;
+            dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowTemplate.Height = 25;
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView2.Size = new Size(243, 493);
             dataGridView2.TabIndex = 3;
+            // 
+            // Column4
+            // 
+            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column4.HeaderText = "№";
+            Column4.Name = "Column4";
+            Column4.ReadOnly = true;
+            Column4.Resizable = DataGridViewTriState.False;
+            Column4.Width = 45;
+            // 
+            // Column5
+            // 
+            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column5.HeaderText = "Название";
+            Column5.Name = "Column5";
+            Column5.ReadOnly = true;
+            Column5.Resizable = DataGridViewTriState.False;
+            Column5.Width = 84;
+            // 
+            // Column6
+            // 
+            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column6.HeaderText = "Время";
+            Column6.Name = "Column6";
+            Column6.ReadOnly = true;
+            Column6.Resizable = DataGridViewTriState.False;
+            Column6.Width = 67;
             // 
             // dataGridView3
             // 
             dataGridView3.AllowUserToAddRows = false;
             dataGridView3.AllowUserToDeleteRows = false;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { Column7, Column8, Column9 });
             dataGridView3.Location = new Point(979, 27);
             dataGridView3.MultiSelect = false;
             dataGridView3.Name = "dataGridView3";
             dataGridView3.ReadOnly = true;
+            dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowTemplate.Height = 25;
+            dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView3.Size = new Size(243, 493);
             dataGridView3.TabIndex = 4;
+            // 
+            // Column7
+            // 
+            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column7.HeaderText = "№";
+            Column7.Name = "Column7";
+            Column7.ReadOnly = true;
+            Column7.Resizable = DataGridViewTriState.False;
+            Column7.Width = 45;
+            // 
+            // Column8
+            // 
+            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column8.HeaderText = "Название";
+            Column8.Name = "Column8";
+            Column8.ReadOnly = true;
+            Column8.Resizable = DataGridViewTriState.False;
+            Column8.Width = 84;
+            // 
+            // Column9
+            // 
+            Column9.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column9.HeaderText = "Время";
+            Column9.Name = "Column9";
+            Column9.ReadOnly = true;
+            Column9.Resizable = DataGridViewTriState.False;
+            Column9.Width = 67;
             // 
             // labelTitleThread1
             // 
@@ -158,6 +257,7 @@
             buttonAddThread1.TabIndex = 8;
             buttonAddThread1.Text = "Добавить сюда";
             buttonAddThread1.UseVisualStyleBackColor = true;
+            buttonAddThread1.Click += buttonAddThread1_Click;
             // 
             // buttonAddThread2
             // 
@@ -168,6 +268,7 @@
             buttonAddThread2.TabIndex = 9;
             buttonAddThread2.Text = "Добавить сюда";
             buttonAddThread2.UseVisualStyleBackColor = true;
+            buttonAddThread2.Click += buttonAddThread2_Click;
             // 
             // buttonAddThread3
             // 
@@ -178,6 +279,7 @@
             buttonAddThread3.TabIndex = 10;
             buttonAddThread3.Text = "Добавить сюда";
             buttonAddThread3.UseVisualStyleBackColor = true;
+            buttonAddThread3.Click += buttonAddThread3_Click;
             // 
             // buttonDelThread1
             // 
@@ -458,5 +560,14 @@
         private Label labelSelectedAction;
         private Label labelTime;
         private TextBox textBoxTime;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column7;
+        private DataGridViewTextBoxColumn Column8;
+        private DataGridViewTextBoxColumn Column9;
     }
 }

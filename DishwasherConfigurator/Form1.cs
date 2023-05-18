@@ -24,7 +24,7 @@ namespace DishwasherConfigurator
             treeViewActionSelecter.Nodes.Add("Слив воды");
             treeViewActionSelecter.Nodes.Add("Мойка");
             treeViewActionSelecter.Nodes.Add("Сушка");
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли");                               // type: 0
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли по времени");                    // type: 0
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск по времени");                        // type: 1
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до срабатывания прессостата");       // type: 2
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до конца работы прессостата");       // type: 3
@@ -91,7 +91,7 @@ namespace DishwasherConfigurator
         {
             switch (treeViewActionSelecter.SelectedNode.Text)
             {
-                case "Клапан соли": return 0;
+                case "Клапан соли по времени": return 0;
                 case "Пропуск по времени": return 1;
                 case "Пропуск до срабатывания прессостата": return 2;
                 case "Пропуск до конца работы прессостата": return 3;
@@ -110,7 +110,142 @@ namespace DishwasherConfigurator
 
         #endregion
 
-        // TODO: Сделать обработку добавления действия
+        #region Обработка добавления действия
+
+        private void buttonAddThread1_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                actionThread1.Add(new DishAction(typeOfSelectedAction, time));
+                dataGridView1.Rows.Clear();
+                for (int i = 0; i < actionThread1.Count; i++)
+                {
+                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                    dataGridView1.Rows.Add(tempRow);
+                }
+
+                labelSelectedAction.Text = "Действие не выбрано";
+                buttonSelectActionCancel.Enabled = false;
+                textBoxTime.Text = "";
+                labelTime.Enabled = false;
+                textBoxTime.Enabled = false;
+                buttonAddThread1.Enabled = false;
+                buttonAddThread2.Enabled = false;
+                buttonAddThread3.Enabled = false;
+                buttonDelThread1.Enabled = true;
+                buttonEditThread1.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private void buttonAddThread2_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                actionThread2.Add(new DishAction(typeOfSelectedAction, time));
+                dataGridView2.Rows.Clear();
+                for (int i = 0; i < actionThread2.Count; i++)
+                {
+                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                    dataGridView2.Rows.Add(tempRow);
+                }
+
+                labelSelectedAction.Text = "Действие не выбрано";
+                buttonSelectActionCancel.Enabled = false;
+                textBoxTime.Text = "";
+                labelTime.Enabled = false;
+                textBoxTime.Enabled = false;
+                buttonAddThread1.Enabled = false;
+                buttonAddThread2.Enabled = false;
+                buttonAddThread3.Enabled = false;
+                buttonDelThread2.Enabled = true;
+                buttonEditThread2.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private void buttonAddThread3_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                actionThread3.Add(new DishAction(typeOfSelectedAction, time));
+                dataGridView3.Rows.Clear();
+                for (int i = 0; i < actionThread3.Count; i++)
+                {
+                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                    dataGridView3.Rows.Add(tempRow);
+                }
+
+                labelSelectedAction.Text = "Действие не выбрано";
+                buttonSelectActionCancel.Enabled = false;
+                textBoxTime.Text = "";
+                labelTime.Enabled = false;
+                textBoxTime.Enabled = false;
+                buttonAddThread1.Enabled = false;
+                buttonAddThread2.Enabled = false;
+                buttonAddThread3.Enabled = false;
+                buttonDelThread3.Enabled = true;
+                buttonEditThread3.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private string getActionNameByType(int type)
+        {
+            switch (type)
+            {
+                case 0: return "Клапан соли";
+                case 1: return "Пропуск по времени";
+                case 2: return "Пропуск до сраб. пресс.";
+                case 3: return "Пропуск до к. р. пресс.";
+                case 4: return "Набор до пресс.";
+                case 5: return "Набор по времени";
+                case 6: return "Слив до пресс.";
+                case 7: return "Слив по времени";
+                case 8: return "Основная помпа";
+                case 9: return "Тэн";
+                case 10: return "Таблетка";
+                case 11: return "Ополаскиватель";
+                case 12: return "Вентилятор";
+            }
+            return "";
+        }
+
+        private int getTime()
+        {
+            try
+            {
+                int time = Int32.Parse(textBoxTime.Text);
+                if (time > 0)
+                {
+                    return time;
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+            return -1;
+        }
+
+        #endregion
+
+        // TODO: расширить окно
 
         #region Работа с COM-портом
 
