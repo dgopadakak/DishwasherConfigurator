@@ -138,6 +138,7 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
+                buttonAddAfterSelectThread1.Enabled = true;
                 buttonDelThread1.Enabled = true;
                 buttonEditThread1.Enabled = true;
             }
@@ -169,6 +170,7 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
+                buttonAddAfterSelectThread2.Enabled = true;
                 buttonDelThread2.Enabled = true;
                 buttonEditThread2.Enabled = true;
             }
@@ -200,6 +202,7 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
+                buttonAddAfterSelectThread3.Enabled = true;
                 buttonDelThread3.Enabled = true;
                 buttonEditThread3.Enabled = true;
             }
@@ -491,16 +494,19 @@ namespace DishwasherConfigurator
                     }
                     if (actionThread1.Count > 0)
                     {
+                        buttonAddAfterSelectThread1.Enabled = true;
                         buttonDelThread1.Enabled = true;
                         buttonEditThread1.Enabled = true;
                     }
                     if (actionThread2.Count > 0)
                     {
+                        buttonAddAfterSelectThread2.Enabled = true;
                         buttonDelThread2.Enabled = true;
                         buttonEditThread2.Enabled = true;
                     }
                     if (actionThread3.Count > 0)
                     {
+                        buttonAddAfterSelectThread3.Enabled = true;
                         buttonDelThread3.Enabled = true;
                         buttonEditThread3.Enabled = true;
                     }
@@ -519,6 +525,94 @@ namespace DishwasherConfigurator
             else
             {
                 MessageBox.Show("На вход поступил файл неправильной конфигурации! Вероятнее всего это не программа.");
+            }
+        }
+
+        #endregion
+
+        #region Удаление действий из потоков
+
+        private void buttonDelThread1_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                actionThread1.RemoveAt(selectedActionIndex);
+                dataGridView1.Rows.Clear();
+                if (actionThread1.Count > 0)
+                {
+                    for (int i = 0; i < actionThread1.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        dataGridView1.Rows.Add(tempRow);
+                    }
+                }
+                else
+                {
+                    buttonAddAfterSelectThread1.Enabled = false;
+                    buttonDelThread1.Enabled = false;
+                    buttonEditThread1.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ошибка удаления!");
+            }
+        }
+
+        private void buttonDelThread2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                actionThread2.RemoveAt(selectedActionIndex);
+                dataGridView2.Rows.Clear();
+                if (actionThread2.Count > 0)
+                {
+                    for (int i = 0; i < actionThread2.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        dataGridView2.Rows.Add(tempRow);
+                    }
+                }
+                else
+                {
+                    buttonAddAfterSelectThread2.Enabled = false;
+                    buttonDelThread2.Enabled = false;
+                    buttonEditThread2.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ошибка удаления!");
+            }
+        }
+
+        private void buttonDelThread3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView3.SelectedRows.Count > 0)
+            {
+                int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                actionThread3.RemoveAt(selectedActionIndex);
+                dataGridView3.Rows.Clear();
+                if (actionThread3.Count > 0)
+                {
+                    for (int i = 0; i < actionThread3.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        dataGridView3.Rows.Add(tempRow);
+                    }
+                }
+                else
+                {
+                    buttonAddAfterSelectThread3.Enabled = false;
+                    buttonDelThread3.Enabled = false;
+                    buttonEditThread3.Enabled = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ошибка удаления!");
             }
         }
 

@@ -302,6 +302,7 @@
             buttonDelThread1.TabIndex = 11;
             buttonDelThread1.Text = "Удалить выделенное";
             buttonDelThread1.UseVisualStyleBackColor = true;
+            buttonDelThread1.Click += buttonDelThread1_Click;
             // 
             // buttonDelThread2
             // 
@@ -312,6 +313,7 @@
             buttonDelThread2.TabIndex = 12;
             buttonDelThread2.Text = "Удалить выделенное";
             buttonDelThread2.UseVisualStyleBackColor = true;
+            buttonDelThread2.Click += buttonDelThread2_Click;
             // 
             // buttonDelThread3
             // 
@@ -322,6 +324,7 @@
             buttonDelThread3.TabIndex = 13;
             buttonDelThread3.Text = "Удалить выделенное";
             buttonDelThread3.UseVisualStyleBackColor = true;
+            buttonDelThread3.Click += buttonDelThread3_Click;
             // 
             // comboBoxComPorts
             // 
