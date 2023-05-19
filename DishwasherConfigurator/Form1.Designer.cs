@@ -68,6 +68,9 @@
             labelTime = new Label();
             labelSelectedAction = new Label();
             groupBoxEditAction = new GroupBox();
+            buttonAddAfterSelectThread1 = new Button();
+            buttonAddAfterSelectThread2 = new Button();
+            buttonAddAfterSelectThread3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -105,7 +108,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(238, 493);
+            dataGridView1.Size = new Size(238, 464);
             dataGridView1.TabIndex = 2;
             // 
             // Column1
@@ -151,7 +154,7 @@
             dataGridView2.RowHeadersVisible = false;
             dataGridView2.RowTemplate.Height = 25;
             dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.Size = new Size(238, 493);
+            dataGridView2.Size = new Size(238, 464);
             dataGridView2.TabIndex = 3;
             // 
             // Column4
@@ -197,7 +200,7 @@
             dataGridView3.RowHeadersVisible = false;
             dataGridView3.RowTemplate.Height = 25;
             dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView3.Size = new Size(238, 493);
+            dataGridView3.Size = new Size(238, 464);
             dataGridView3.TabIndex = 4;
             // 
             // Column7
@@ -260,7 +263,7 @@
             // buttonAddThread1
             // 
             buttonAddThread1.Enabled = false;
-            buttonAddThread1.Location = new Point(496, 526);
+            buttonAddThread1.Location = new Point(496, 497);
             buttonAddThread1.Name = "buttonAddThread1";
             buttonAddThread1.Size = new Size(238, 23);
             buttonAddThread1.TabIndex = 8;
@@ -271,7 +274,7 @@
             // buttonAddThread2
             // 
             buttonAddThread2.Enabled = false;
-            buttonAddThread2.Location = new Point(740, 526);
+            buttonAddThread2.Location = new Point(740, 497);
             buttonAddThread2.Name = "buttonAddThread2";
             buttonAddThread2.Size = new Size(238, 23);
             buttonAddThread2.TabIndex = 9;
@@ -282,7 +285,7 @@
             // buttonAddThread3
             // 
             buttonAddThread3.Enabled = false;
-            buttonAddThread3.Location = new Point(984, 526);
+            buttonAddThread3.Location = new Point(984, 497);
             buttonAddThread3.Name = "buttonAddThread3";
             buttonAddThread3.Size = new Size(238, 23);
             buttonAddThread3.TabIndex = 10;
@@ -485,12 +488,42 @@
             // 
             // groupBoxEditAction
             // 
-            groupBoxEditAction.Location = new Point(292, 379);
+            groupBoxEditAction.Location = new Point(292, 466);
             groupBoxEditAction.Name = "groupBoxEditAction";
             groupBoxEditAction.Size = new Size(198, 141);
             groupBoxEditAction.TabIndex = 27;
             groupBoxEditAction.TabStop = false;
             groupBoxEditAction.Text = "Изменить действие";
+            // 
+            // buttonAddAfterSelectThread1
+            // 
+            buttonAddAfterSelectThread1.Enabled = false;
+            buttonAddAfterSelectThread1.Location = new Point(496, 526);
+            buttonAddAfterSelectThread1.Name = "buttonAddAfterSelectThread1";
+            buttonAddAfterSelectThread1.Size = new Size(238, 23);
+            buttonAddAfterSelectThread1.TabIndex = 28;
+            buttonAddAfterSelectThread1.Text = "Добавить после выделенного";
+            buttonAddAfterSelectThread1.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddAfterSelectThread2
+            // 
+            buttonAddAfterSelectThread2.Enabled = false;
+            buttonAddAfterSelectThread2.Location = new Point(740, 526);
+            buttonAddAfterSelectThread2.Name = "buttonAddAfterSelectThread2";
+            buttonAddAfterSelectThread2.Size = new Size(238, 23);
+            buttonAddAfterSelectThread2.TabIndex = 29;
+            buttonAddAfterSelectThread2.Text = "Добавить после выделенного";
+            buttonAddAfterSelectThread2.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddAfterSelectThread3
+            // 
+            buttonAddAfterSelectThread3.Enabled = false;
+            buttonAddAfterSelectThread3.Location = new Point(984, 526);
+            buttonAddAfterSelectThread3.Name = "buttonAddAfterSelectThread3";
+            buttonAddAfterSelectThread3.Size = new Size(238, 23);
+            buttonAddAfterSelectThread3.TabIndex = 30;
+            buttonAddAfterSelectThread3.Text = "Добавить после выделенного";
+            buttonAddAfterSelectThread3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -498,6 +531,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1234, 661);
+            Controls.Add(buttonAddAfterSelectThread3);
+            Controls.Add(buttonAddAfterSelectThread2);
+            Controls.Add(buttonAddAfterSelectThread1);
             Controls.Add(groupBoxEditAction);
             Controls.Add(groupBoxAddAction);
             Controls.Add(buttonEditThread3);
@@ -580,5 +616,8 @@
         private DataGridViewTextBoxColumn Column7;
         private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column9;
+        private Button buttonAddAfterSelectThread1;
+        private Button buttonAddAfterSelectThread2;
+        private Button buttonAddAfterSelectThread3;
     }
 }

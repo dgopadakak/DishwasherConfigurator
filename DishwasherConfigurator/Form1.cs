@@ -395,7 +395,7 @@ namespace DishwasherConfigurator
             }
             for (int i = 0; i < actionThread1.Count; i++)
             {
-                if (actionThread1[i].getType()  != -1 || isEmptySpacesNeeded)
+                if (actionThread1[i].getType() != -1 || isEmptySpacesNeeded)
                 {
                     s += actionThread1[i].getType() + ";" + actionThread1[i].getTime() + "$";
                 }
