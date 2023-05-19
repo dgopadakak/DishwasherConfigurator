@@ -618,6 +618,36 @@ namespace DishwasherConfigurator
 
         #endregion
 
+        #region Работа калькулятора
+
+        private void buttonMinToSecCal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long min = long.Parse(textBoxMinInputCal.Text);
+                labelSecOutputCal.Text = "= " + (min * 60) + " с";
+            }
+            catch
+            {
+                labelSecOutputCal.Text = "= Ошибка";
+            }
+        }
+
+        private void buttonSecToMinCal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                long sec = long.Parse(textBoxSecInputCal.Text);
+                labelMinOutputCal.Text = "= " + (sec / 60) + " мин.";
+            }
+            catch
+            {
+                labelMinOutputCal.Text = "= Ошибка";
+            }
+        }
+
+        #endregion
+
         private string getActionNameByType(int type)
         {
             switch (type)

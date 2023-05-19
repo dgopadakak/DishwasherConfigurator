@@ -71,10 +71,20 @@
             buttonAddAfterSelectThread1 = new Button();
             buttonAddAfterSelectThread2 = new Button();
             buttonAddAfterSelectThread3 = new Button();
+            groupBoxCalcul = new GroupBox();
+            buttonSecToMinCal = new Button();
+            labelMinOutputCal = new Label();
+            textBoxSecInputCal = new TextBox();
+            labelSecInputCal = new Label();
+            buttonMinToSecCal = new Button();
+            labelSecOutputCal = new Label();
+            textBoxMinInputCal = new TextBox();
+            labelMinInputCal = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             groupBoxAddAction.SuspendLayout();
+            groupBoxCalcul.SuspendLayout();
             SuspendLayout();
             // 
             // treeViewActionSelecter
@@ -267,7 +277,7 @@
             buttonAddThread1.Name = "buttonAddThread1";
             buttonAddThread1.Size = new Size(238, 23);
             buttonAddThread1.TabIndex = 8;
-            buttonAddThread1.Text = "Добавить сюда";
+            buttonAddThread1.Text = "Добавить в конец";
             buttonAddThread1.UseVisualStyleBackColor = true;
             buttonAddThread1.Click += buttonAddThread1_Click;
             // 
@@ -278,7 +288,7 @@
             buttonAddThread2.Name = "buttonAddThread2";
             buttonAddThread2.Size = new Size(238, 23);
             buttonAddThread2.TabIndex = 9;
-            buttonAddThread2.Text = "Добавить сюда";
+            buttonAddThread2.Text = "Добавить в конец";
             buttonAddThread2.UseVisualStyleBackColor = true;
             buttonAddThread2.Click += buttonAddThread2_Click;
             // 
@@ -289,14 +299,14 @@
             buttonAddThread3.Name = "buttonAddThread3";
             buttonAddThread3.Size = new Size(238, 23);
             buttonAddThread3.TabIndex = 10;
-            buttonAddThread3.Text = "Добавить сюда";
+            buttonAddThread3.Text = "Добавить в конец";
             buttonAddThread3.UseVisualStyleBackColor = true;
             buttonAddThread3.Click += buttonAddThread3_Click;
             // 
             // buttonDelThread1
             // 
             buttonDelThread1.Enabled = false;
-            buttonDelThread1.Location = new Point(496, 555);
+            buttonDelThread1.Location = new Point(496, 584);
             buttonDelThread1.Name = "buttonDelThread1";
             buttonDelThread1.Size = new Size(238, 23);
             buttonDelThread1.TabIndex = 11;
@@ -307,7 +317,7 @@
             // buttonDelThread2
             // 
             buttonDelThread2.Enabled = false;
-            buttonDelThread2.Location = new Point(740, 555);
+            buttonDelThread2.Location = new Point(740, 584);
             buttonDelThread2.Name = "buttonDelThread2";
             buttonDelThread2.Size = new Size(238, 23);
             buttonDelThread2.TabIndex = 12;
@@ -318,7 +328,7 @@
             // buttonDelThread3
             // 
             buttonDelThread3.Enabled = false;
-            buttonDelThread3.Location = new Point(984, 555);
+            buttonDelThread3.Location = new Point(984, 584);
             buttonDelThread3.Name = "buttonDelThread3";
             buttonDelThread3.Size = new Size(238, 23);
             buttonDelThread3.TabIndex = 13;
@@ -411,7 +421,7 @@
             // buttonEditThread1
             // 
             buttonEditThread1.Enabled = false;
-            buttonEditThread1.Location = new Point(496, 584);
+            buttonEditThread1.Location = new Point(496, 555);
             buttonEditThread1.Name = "buttonEditThread1";
             buttonEditThread1.Size = new Size(238, 23);
             buttonEditThread1.TabIndex = 22;
@@ -421,7 +431,7 @@
             // buttonEditThread2
             // 
             buttonEditThread2.Enabled = false;
-            buttonEditThread2.Location = new Point(740, 584);
+            buttonEditThread2.Location = new Point(740, 555);
             buttonEditThread2.Name = "buttonEditThread2";
             buttonEditThread2.Size = new Size(238, 23);
             buttonEditThread2.TabIndex = 23;
@@ -431,7 +441,7 @@
             // buttonEditThread3
             // 
             buttonEditThread3.Enabled = false;
-            buttonEditThread3.Location = new Point(984, 584);
+            buttonEditThread3.Location = new Point(984, 555);
             buttonEditThread3.Name = "buttonEditThread3";
             buttonEditThread3.Size = new Size(238, 23);
             buttonEditThread3.TabIndex = 24;
@@ -491,12 +501,13 @@
             // 
             // groupBoxEditAction
             // 
-            groupBoxEditAction.Location = new Point(292, 466);
+            groupBoxEditAction.Location = new Point(292, 307);
             groupBoxEditAction.Name = "groupBoxEditAction";
             groupBoxEditAction.Size = new Size(198, 141);
             groupBoxEditAction.TabIndex = 27;
             groupBoxEditAction.TabStop = false;
             groupBoxEditAction.Text = "Изменить действие";
+            groupBoxEditAction.Visible = false;
             // 
             // buttonAddAfterSelectThread1
             // 
@@ -528,12 +539,100 @@
             buttonAddAfterSelectThread3.Text = "Добавить после выделенного";
             buttonAddAfterSelectThread3.UseVisualStyleBackColor = true;
             // 
+            // groupBoxCalcul
+            // 
+            groupBoxCalcul.Controls.Add(buttonSecToMinCal);
+            groupBoxCalcul.Controls.Add(labelMinOutputCal);
+            groupBoxCalcul.Controls.Add(textBoxSecInputCal);
+            groupBoxCalcul.Controls.Add(labelSecInputCal);
+            groupBoxCalcul.Controls.Add(buttonMinToSecCal);
+            groupBoxCalcul.Controls.Add(labelSecOutputCal);
+            groupBoxCalcul.Controls.Add(textBoxMinInputCal);
+            groupBoxCalcul.Controls.Add(labelMinInputCal);
+            groupBoxCalcul.Location = new Point(292, 163);
+            groupBoxCalcul.Name = "groupBoxCalcul";
+            groupBoxCalcul.Size = new Size(198, 138);
+            groupBoxCalcul.TabIndex = 31;
+            groupBoxCalcul.TabStop = false;
+            groupBoxCalcul.Text = "Калькулятор";
+            // 
+            // buttonSecToMinCal
+            // 
+            buttonSecToMinCal.Location = new Point(6, 109);
+            buttonSecToMinCal.Name = "buttonSecToMinCal";
+            buttonSecToMinCal.Size = new Size(186, 23);
+            buttonSecToMinCal.TabIndex = 7;
+            buttonSecToMinCal.Text = "Рассчитать";
+            buttonSecToMinCal.UseVisualStyleBackColor = true;
+            buttonSecToMinCal.Click += buttonSecToMinCal_Click;
+            // 
+            // labelMinOutputCal
+            // 
+            labelMinOutputCal.AutoSize = true;
+            labelMinOutputCal.Location = new Point(104, 83);
+            labelMinOutputCal.Name = "labelMinOutputCal";
+            labelMinOutputCal.Size = new Size(53, 15);
+            labelMinOutputCal.TabIndex = 6;
+            labelMinOutputCal.Text = "= 0 мин.";
+            // 
+            // textBoxSecInputCal
+            // 
+            textBoxSecInputCal.Location = new Point(28, 80);
+            textBoxSecInputCal.Name = "textBoxSecInputCal";
+            textBoxSecInputCal.Size = new Size(70, 23);
+            textBoxSecInputCal.TabIndex = 5;
+            // 
+            // labelSecInputCal
+            // 
+            labelSecInputCal.AutoSize = true;
+            labelSecInputCal.Location = new Point(6, 83);
+            labelSecInputCal.Name = "labelSecInputCal";
+            labelSecInputCal.Size = new Size(16, 15);
+            labelSecInputCal.TabIndex = 4;
+            labelSecInputCal.Text = "с:";
+            // 
+            // buttonMinToSecCal
+            // 
+            buttonMinToSecCal.Location = new Point(6, 51);
+            buttonMinToSecCal.Name = "buttonMinToSecCal";
+            buttonMinToSecCal.Size = new Size(186, 23);
+            buttonMinToSecCal.TabIndex = 3;
+            buttonMinToSecCal.Text = "Рассчитать";
+            buttonMinToSecCal.UseVisualStyleBackColor = true;
+            buttonMinToSecCal.Click += buttonMinToSecCal_Click;
+            // 
+            // labelSecOutputCal
+            // 
+            labelSecOutputCal.AutoSize = true;
+            labelSecOutputCal.Location = new Point(104, 25);
+            labelSecOutputCal.Name = "labelSecOutputCal";
+            labelSecOutputCal.Size = new Size(33, 15);
+            labelSecOutputCal.TabIndex = 2;
+            labelSecOutputCal.Text = "= 0 с";
+            // 
+            // textBoxMinInputCal
+            // 
+            textBoxMinInputCal.Location = new Point(50, 22);
+            textBoxMinInputCal.Name = "textBoxMinInputCal";
+            textBoxMinInputCal.Size = new Size(48, 23);
+            textBoxMinInputCal.TabIndex = 1;
+            // 
+            // labelMinInputCal
+            // 
+            labelMinInputCal.AutoSize = true;
+            labelMinInputCal.Location = new Point(6, 25);
+            labelMinInputCal.Name = "labelMinInputCal";
+            labelMinInputCal.Size = new Size(38, 15);
+            labelMinInputCal.TabIndex = 0;
+            labelMinInputCal.Text = "Мин.:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1234, 661);
+            Controls.Add(groupBoxCalcul);
             Controls.Add(buttonAddAfterSelectThread3);
             Controls.Add(buttonAddAfterSelectThread2);
             Controls.Add(buttonAddAfterSelectThread1);
@@ -573,6 +672,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             groupBoxAddAction.ResumeLayout(false);
             groupBoxAddAction.PerformLayout();
+            groupBoxCalcul.ResumeLayout(false);
+            groupBoxCalcul.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -622,5 +723,14 @@
         private Button buttonAddAfterSelectThread1;
         private Button buttonAddAfterSelectThread2;
         private Button buttonAddAfterSelectThread3;
+        private GroupBox groupBoxCalcul;
+        private Label labelSecOutputCal;
+        private TextBox textBoxMinInputCal;
+        private Label labelMinInputCal;
+        private Button buttonMinToSecCal;
+        private Button buttonSecToMinCal;
+        private Label labelMinOutputCal;
+        private TextBox textBoxSecInputCal;
+        private Label labelSecInputCal;
     }
 }
