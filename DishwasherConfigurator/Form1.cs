@@ -30,6 +30,7 @@ namespace DishwasherConfigurator
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск по времени");                        // type: 1
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до срабатывания прессостата");       // type: 2
             treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до конца работы прессостата");       // type: 3
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Пустота");                                   // type: -1
             treeViewActionSelecter.Nodes[1].Nodes.Add("Набор до прессостата");                      // type: 4
             treeViewActionSelecter.Nodes[1].Nodes.Add("Набор по времени");                          // type: 5
             treeViewActionSelecter.Nodes[2].Nodes.Add("Слив до прессостата");                       // type: 6
@@ -50,7 +51,7 @@ namespace DishwasherConfigurator
         private void buttonSelectAction_Click(object sender, EventArgs e)
         {
             typeOfSelectedAction = getTypeOfAction();
-            if (typeOfSelectedAction != -1)
+            if (typeOfSelectedAction != -2)
             {
                 buttonSelectActionCancel.Enabled = true;
                 buttonAddThread1.Enabled = true;
@@ -93,6 +94,7 @@ namespace DishwasherConfigurator
         {
             switch (treeViewActionSelecter.SelectedNode.Text)
             {
+                case "Пустота": return -1;
                 case "Клапан соли по времени": return 0;
                 case "Пропуск по времени": return 1;
                 case "Пропуск до срабатывания прессостата": return 2;
@@ -107,7 +109,7 @@ namespace DishwasherConfigurator
                 case "Выброс ополаскивателя по времени": return 11;
                 case "Вентилятор по времени": return 12;
             }
-            return -1;
+            return -2;
         }
 
         #endregion
@@ -337,7 +339,7 @@ namespace DishwasherConfigurator
             if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = oSaveFileDialog.FileName;
-                File.WriteAllText(fileName, compilateDishwasherProgram());
+                File.WriteAllText(fileName, compilateDishwasherProgram(true));
             }
         }
 
@@ -356,22 +358,63 @@ namespace DishwasherConfigurator
 
         #region Превращение программы в строку и обратно
 
-        private string compilateDishwasherProgram()
+        private string compilateDishwasherProgram(bool isEmptySpacesNeeded)
         {
-            string s = actionThread1.Count + "$" + actionThread2.Count + "$" + actionThread3.Count + "$@";
+            string s;
+            if (isEmptySpacesNeeded)
+            {
+                s = actionThread1.Count + "$" + actionThread2.Count + "$" + actionThread3.Count + "$@";
+            }
+            else
+            {
+                int n1 = actionThread1.Count;
+                int n2 = actionThread2.Count;
+                int n3 = actionThread3.Count;
+                for (int i = 0; i < actionThread1.Count; i++)
+                {
+                    if (actionThread1[i].getType() == -1)
+                    {
+                        n1--;
+                    }
+                }
+                for (int i = 0; i < actionThread2.Count; i++)
+                {
+                    if (actionThread2[i].getType() == -1)
+                    {
+                        n2--;
+                    }
+                }
+                for (int i = 0; i < actionThread3.Count; i++)
+                {
+                    if (actionThread3[i].getType() == -1)
+                    {
+                        n3--;
+                    }
+                }
+                s = n1 + "$" + n2 + "$" + n3 + "$@";
+            }
             for (int i = 0; i < actionThread1.Count; i++)
             {
-                s += actionThread1[i].getType() + ";" + actionThread1[i].getTime() + "$";
+                if (actionThread1[i].getType()  != -1 || isEmptySpacesNeeded)
+                {
+                    s += actionThread1[i].getType() + ";" + actionThread1[i].getTime() + "$";
+                }
             }
             s += "@";
             for (int i = 0; i < actionThread2.Count; i++)
             {
-                s += actionThread2[i].getType() + ";" + actionThread2[i].getTime() + "$";
+                if (actionThread2[i].getType() != -1 || isEmptySpacesNeeded)
+                {
+                    s += actionThread2[i].getType() + ";" + actionThread2[i].getTime() + "$";
+                }
             }
             s += "@";
             for (int i = 0; i < actionThread3.Count; i++)
             {
-                s += actionThread3[i].getType() + ";" + actionThread3[i].getTime() + "$";
+                if (actionThread3[i].getType() != -1 || isEmptySpacesNeeded)
+                {
+                    s += actionThread3[i].getType() + ";" + actionThread3[i].getTime() + "$";
+                }
             }
             s += "@#program#";
             return s;
@@ -485,6 +528,7 @@ namespace DishwasherConfigurator
         {
             switch (type)
             {
+                case -1: return "";
                 case 0: return "Клапан соли";
                 case 1: return "Пропуск по времени";
                 case 2: return "Пропуск до сраб. пресс.";
