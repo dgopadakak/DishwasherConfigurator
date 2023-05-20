@@ -80,10 +80,16 @@
             labelSecOutputCal = new Label();
             textBoxMinInputCal = new TextBox();
             labelMinInputCal = new Label();
+            labelNameEdit = new Label();
+            textBoxTimeEdit = new TextBox();
+            labelTimeEdit = new Label();
+            buttonConfirmEdit = new Button();
+            buttonCancelEdit = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             groupBoxAddAction.SuspendLayout();
+            groupBoxEditAction.SuspendLayout();
             groupBoxCalcul.SuspendLayout();
             SuspendLayout();
             // 
@@ -501,9 +507,14 @@
             // 
             // groupBoxEditAction
             // 
+            groupBoxEditAction.Controls.Add(buttonCancelEdit);
+            groupBoxEditAction.Controls.Add(buttonConfirmEdit);
+            groupBoxEditAction.Controls.Add(labelTimeEdit);
+            groupBoxEditAction.Controls.Add(textBoxTimeEdit);
+            groupBoxEditAction.Controls.Add(labelNameEdit);
             groupBoxEditAction.Location = new Point(292, 307);
             groupBoxEditAction.Name = "groupBoxEditAction";
-            groupBoxEditAction.Size = new Size(198, 141);
+            groupBoxEditAction.Size = new Size(198, 144);
             groupBoxEditAction.TabIndex = 27;
             groupBoxEditAction.TabStop = false;
             groupBoxEditAction.Text = "Изменить действие";
@@ -629,6 +640,48 @@
             labelMinInputCal.TabIndex = 0;
             labelMinInputCal.Text = "Мин.:";
             // 
+            // labelNameEdit
+            // 
+            labelNameEdit.Location = new Point(6, 19);
+            labelNameEdit.Name = "labelNameEdit";
+            labelNameEdit.Size = new Size(186, 34);
+            labelNameEdit.TabIndex = 0;
+            labelNameEdit.Text = "label1";
+            // 
+            // textBoxTimeEdit
+            // 
+            textBoxTimeEdit.Location = new Point(74, 56);
+            textBoxTimeEdit.Name = "textBoxTimeEdit";
+            textBoxTimeEdit.Size = new Size(118, 23);
+            textBoxTimeEdit.TabIndex = 1;
+            // 
+            // labelTimeEdit
+            // 
+            labelTimeEdit.AutoSize = true;
+            labelTimeEdit.Location = new Point(6, 59);
+            labelTimeEdit.Name = "labelTimeEdit";
+            labelTimeEdit.Size = new Size(62, 15);
+            labelTimeEdit.TabIndex = 2;
+            labelTimeEdit.Text = "Время (с):";
+            // 
+            // buttonConfirmEdit
+            // 
+            buttonConfirmEdit.Location = new Point(6, 85);
+            buttonConfirmEdit.Name = "buttonConfirmEdit";
+            buttonConfirmEdit.Size = new Size(186, 23);
+            buttonConfirmEdit.TabIndex = 3;
+            buttonConfirmEdit.Text = "Подтвердить";
+            buttonConfirmEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancelEdit
+            // 
+            buttonCancelEdit.Location = new Point(6, 114);
+            buttonCancelEdit.Name = "buttonCancelEdit";
+            buttonCancelEdit.Size = new Size(186, 23);
+            buttonCancelEdit.TabIndex = 4;
+            buttonCancelEdit.Text = "Отмена";
+            buttonCancelEdit.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -675,6 +728,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             groupBoxAddAction.ResumeLayout(false);
             groupBoxAddAction.PerformLayout();
+            groupBoxEditAction.ResumeLayout(false);
+            groupBoxEditAction.PerformLayout();
             groupBoxCalcul.ResumeLayout(false);
             groupBoxCalcul.PerformLayout();
             ResumeLayout(false);
@@ -735,5 +790,10 @@
         private Label labelMinOutputCal;
         private TextBox textBoxSecInputCal;
         private Label labelSecInputCal;
+        private Button buttonCancelEdit;
+        private Button buttonConfirmEdit;
+        private Label labelTimeEdit;
+        private TextBox textBoxTimeEdit;
+        private Label labelNameEdit;
     }
 }
