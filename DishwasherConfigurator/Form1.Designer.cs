@@ -518,6 +518,7 @@
             buttonAddAfterSelectThread1.TabIndex = 28;
             buttonAddAfterSelectThread1.Text = "Добавить после выделенного";
             buttonAddAfterSelectThread1.UseVisualStyleBackColor = true;
+            buttonAddAfterSelectThread1.Click += buttonAddAfterSelectThread1_Click;
             // 
             // buttonAddAfterSelectThread2
             // 
@@ -528,6 +529,7 @@
             buttonAddAfterSelectThread2.TabIndex = 29;
             buttonAddAfterSelectThread2.Text = "Добавить после выделенного";
             buttonAddAfterSelectThread2.UseVisualStyleBackColor = true;
+            buttonAddAfterSelectThread2.Click += buttonAddAfterSelectThread2_Click;
             // 
             // buttonAddAfterSelectThread3
             // 
@@ -538,6 +540,7 @@
             buttonAddAfterSelectThread3.TabIndex = 30;
             buttonAddAfterSelectThread3.Text = "Добавить после выделенного";
             buttonAddAfterSelectThread3.UseVisualStyleBackColor = true;
+            buttonAddAfterSelectThread3.Click += buttonAddAfterSelectThread3_Click;
             // 
             // groupBoxCalcul
             // 

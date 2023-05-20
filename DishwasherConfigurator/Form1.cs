@@ -57,6 +57,18 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = true;
                 buttonAddThread2.Enabled = true;
                 buttonAddThread3.Enabled = true;
+                if (actionThread1.Count > 0)
+                {
+                    buttonAddAfterSelectThread1.Enabled = true;
+                }
+                if (actionThread2.Count > 0)
+                {
+                    buttonAddAfterSelectThread2.Enabled = true;
+                }
+                if (actionThread3.Count > 0)
+                {
+                    buttonAddAfterSelectThread3.Enabled = true;
+                }
 
                 labelSelectedAction.Text = "Выбрано действие: " + treeViewActionSelecter.SelectedNode.Text;
                 int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
@@ -114,7 +126,7 @@ namespace DishwasherConfigurator
 
         #endregion
 
-        #region Обработка добавления действия
+        #region Обработка добавления действия в конец
 
         private void buttonAddThread1_Click(object sender, EventArgs e)
         {
@@ -122,12 +134,22 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                int selectedActionIndex = -1;
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                }
                 actionThread1.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView1.Rows.Clear();
                 for (int i = 0; i < actionThread1.Count; i++)
                 {
                     string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
                     dataGridView1.Rows.Add(tempRow);
+                }
+                if (selectedActionIndex != -1)
+                {
+                    dataGridView1.Rows[selectedActionIndex].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[selectedActionIndex].Cells[0];
                 }
 
                 labelSelectedAction.Text = "Действие не выбрано";
@@ -138,7 +160,9 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
-                buttonAddAfterSelectThread1.Enabled = true;
+                buttonAddAfterSelectThread1.Enabled = false;
+                buttonAddAfterSelectThread2.Enabled = false;
+                buttonAddAfterSelectThread3.Enabled = false;
                 buttonDelThread1.Enabled = true;
                 buttonEditThread1.Enabled = true;
             }
@@ -154,12 +178,22 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                int selectedActionIndex = -1;
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                }
                 actionThread2.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView2.Rows.Clear();
                 for (int i = 0; i < actionThread2.Count; i++)
                 {
                     string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
                     dataGridView2.Rows.Add(tempRow);
+                }
+                if (selectedActionIndex != -1)
+                {
+                    dataGridView2.Rows[selectedActionIndex].Selected = true;
+                    dataGridView2.CurrentCell = dataGridView2.Rows[selectedActionIndex].Cells[0];
                 }
 
                 labelSelectedAction.Text = "Действие не выбрано";
@@ -170,7 +204,9 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
-                buttonAddAfterSelectThread2.Enabled = true;
+                buttonAddAfterSelectThread1.Enabled = false;
+                buttonAddAfterSelectThread2.Enabled = false;
+                buttonAddAfterSelectThread3.Enabled = false;
                 buttonDelThread2.Enabled = true;
                 buttonEditThread2.Enabled = true;
             }
@@ -186,12 +222,22 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                int selectedActionIndex = -1;
+                if (dataGridView3.SelectedRows.Count > 0)
+                {
+                    selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                }
                 actionThread3.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView3.Rows.Clear();
                 for (int i = 0; i < actionThread3.Count; i++)
                 {
                     string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
                     dataGridView3.Rows.Add(tempRow);
+                }
+                if (selectedActionIndex != -1)
+                {
+                    dataGridView3.Rows[selectedActionIndex].Selected = true;
+                    dataGridView3.CurrentCell = dataGridView3.Rows[selectedActionIndex].Cells[0];
                 }
 
                 labelSelectedAction.Text = "Действие не выбрано";
@@ -202,7 +248,9 @@ namespace DishwasherConfigurator
                 buttonAddThread1.Enabled = false;
                 buttonAddThread2.Enabled = false;
                 buttonAddThread3.Enabled = false;
-                buttonAddAfterSelectThread3.Enabled = true;
+                buttonAddAfterSelectThread1.Enabled = false;
+                buttonAddAfterSelectThread2.Enabled = false;
+                buttonAddAfterSelectThread3.Enabled = false;
                 buttonDelThread3.Enabled = true;
                 buttonEditThread3.Enabled = true;
             }
@@ -227,6 +275,136 @@ namespace DishwasherConfigurator
                 return -1;
             }
             return -1;
+        }
+
+        #endregion
+
+        #region Обработка добавления действия в строку, следующую за выделенной
+
+        private void buttonAddAfterSelectThread1_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    actionThread1.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
+                    dataGridView1.Rows.Clear();
+                    for (int i = 0; i < actionThread1.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        dataGridView1.Rows.Add(tempRow);
+                    }
+                    dataGridView1.Rows[selectedActionIndex].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[selectedActionIndex].Cells[0];
+
+                    labelSelectedAction.Text = "Действие не выбрано";
+                    buttonSelectActionCancel.Enabled = false;
+                    textBoxTime.Text = "";
+                    labelTime.Enabled = false;
+                    textBoxTime.Enabled = false;
+                    buttonAddThread1.Enabled = false;
+                    buttonAddThread2.Enabled = false;
+                    buttonAddThread3.Enabled = false;
+                    buttonAddAfterSelectThread1.Enabled = false;
+                    buttonAddAfterSelectThread2.Enabled = false;
+                    buttonAddAfterSelectThread3.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private void buttonAddAfterSelectThread2_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                    actionThread2.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
+                    dataGridView2.Rows.Clear();
+                    for (int i = 0; i < actionThread2.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        dataGridView2.Rows.Add(tempRow);
+                    }
+                    dataGridView2.Rows[selectedActionIndex].Selected = true;
+                    dataGridView2.CurrentCell = dataGridView2.Rows[selectedActionIndex].Cells[0];
+
+                    labelSelectedAction.Text = "Действие не выбрано";
+                    buttonSelectActionCancel.Enabled = false;
+                    textBoxTime.Text = "";
+                    labelTime.Enabled = false;
+                    textBoxTime.Enabled = false;
+                    buttonAddThread1.Enabled = false;
+                    buttonAddThread2.Enabled = false;
+                    buttonAddThread3.Enabled = false;
+                    buttonAddAfterSelectThread1.Enabled = false;
+                    buttonAddAfterSelectThread2.Enabled = false;
+                    buttonAddAfterSelectThread3.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private void buttonAddAfterSelectThread3_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int time = getTime();
+            if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
+            {
+                if (dataGridView3.SelectedRows.Count > 0)
+                {
+                    int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                    actionThread3.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
+                    dataGridView3.Rows.Clear();
+                    for (int i = 0; i < actionThread3.Count; i++)
+                    {
+                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        dataGridView3.Rows.Add(tempRow);
+                    }
+                    dataGridView3.Rows[selectedActionIndex].Selected = true;
+                    dataGridView3.CurrentCell = dataGridView3.Rows[selectedActionIndex].Cells[0];
+
+                    labelSelectedAction.Text = "Действие не выбрано";
+                    buttonSelectActionCancel.Enabled = false;
+                    textBoxTime.Text = "";
+                    labelTime.Enabled = false;
+                    textBoxTime.Enabled = false;
+                    buttonAddThread1.Enabled = false;
+                    buttonAddThread2.Enabled = false;
+                    buttonAddThread3.Enabled = false;
+                    buttonAddAfterSelectThread1.Enabled = false;
+                    buttonAddAfterSelectThread2.Enabled = false;
+                    buttonAddAfterSelectThread3.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
         }
 
         #endregion
@@ -494,19 +672,16 @@ namespace DishwasherConfigurator
                     }
                     if (actionThread1.Count > 0)
                     {
-                        buttonAddAfterSelectThread1.Enabled = true;
                         buttonDelThread1.Enabled = true;
                         buttonEditThread1.Enabled = true;
                     }
                     if (actionThread2.Count > 0)
                     {
-                        buttonAddAfterSelectThread2.Enabled = true;
                         buttonDelThread2.Enabled = true;
                         buttonEditThread2.Enabled = true;
                     }
                     if (actionThread3.Count > 0)
                     {
-                        buttonAddAfterSelectThread3.Enabled = true;
                         buttonDelThread3.Enabled = true;
                         buttonEditThread3.Enabled = true;
                     }
