@@ -464,12 +464,26 @@ namespace DishwasherConfigurator
 
         private void parseInString()
         {
-            while (inString.IndexOf("#") != -1)
+            while (inString.IndexOf("!") != -1)
             {
-                string command = inString.Substring(0, inString.IndexOf("#"));
-                inString = inString.Substring(inString.IndexOf("#") + 1);
+                string command = inString.Substring(0, inString.IndexOf("!"));
+                inString = inString.Substring(inString.IndexOf("!") + 1);
 
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                if (command.IndexOf("@#program#") > 0)
+                {
+                    readDishwasherProgram(command);
+                }
+                if (command.IndexOf("OK") > 0)
+                {
+                    if (command.Substring(0, command.IndexOf("O")) == compilateDishwasherProgram(false))
+                    {
+                        MessageBox.Show("Программа успешно записана!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Целостность программы нарушена при записи (или при проверке целостности возникла ошибка)! Попробуйте еще раз.");
+                    }
+                }
             }
         }
 
@@ -499,12 +513,27 @@ namespace DishwasherConfigurator
 
         private void buttonSendProgramByCom_Click(object sender, EventArgs e)
         {
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            string s = compilateDishwasherProgram(false) + "!";
+            try
+            {
+                serialPort.Write(s);
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка отправки программы! Проверьте подключение!");
+            }
         }
 
         private void buttonReadProgramByCom_Click(object sender, EventArgs e)
         {
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            try
+            {
+                serialPort.Write("get_program!");
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка запроса программы! Проверьте подключение!");
+            }
         }
 
         private void closeComPort()
