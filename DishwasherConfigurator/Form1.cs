@@ -16,6 +16,9 @@ namespace DishwasherConfigurator
 
         private int typeOfSelectedAction = -1;
 
+        private byte numOfEditingThread = 0;
+        private int indexOfEditingAction = -1;
+
         public Form1()
         {
             InitializeComponent();
@@ -134,6 +137,7 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                closeEditGroupBox();
                 int selectedActionIndex = -1;
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
@@ -178,6 +182,7 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                closeEditGroupBox();
                 int selectedActionIndex = -1;
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
@@ -222,6 +227,7 @@ namespace DishwasherConfigurator
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
+                closeEditGroupBox();
                 int selectedActionIndex = -1;
                 if (dataGridView3.SelectedRows.Count > 0)
                 {
@@ -289,6 +295,7 @@ namespace DishwasherConfigurator
             {
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
+                    closeEditGroupBox();
                     int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
                     actionThread1.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView1.Rows.Clear();
@@ -331,6 +338,7 @@ namespace DishwasherConfigurator
             {
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
+                    closeEditGroupBox();
                     int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
                     actionThread2.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView2.Rows.Clear();
@@ -373,6 +381,7 @@ namespace DishwasherConfigurator
             {
                 if (dataGridView3.SelectedRows.Count > 0)
                 {
+                    closeEditGroupBox();
                     int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
                     actionThread3.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView3.Rows.Clear();
@@ -700,6 +709,191 @@ namespace DishwasherConfigurator
             else
             {
                 MessageBox.Show("На вход поступил файл неправильной конфигурации! Вероятнее всего это не программа.");
+            }
+        }
+
+        #endregion
+
+        #region Изменение действия
+
+        private void buttonEditThread1_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            if (typesOfTimeBasedActions.Contains(actionThread1[selectedActionIndex].getType()))
+            {
+                buttonDelThread1.Enabled = false;
+                buttonReadProgramFromFile.Enabled = false;
+                buttonReadProgramByCom.Enabled = false;
+                numOfEditingThread = 1;
+                indexOfEditingAction = selectedActionIndex;
+                groupBoxEditAction.Visible = true;
+                labelNameEdit.Text = getActionNameByType(actionThread1[selectedActionIndex].getType());
+                textBoxTimeEdit.Text = actionThread1[selectedActionIndex].getTime().ToString();
+            }
+            else
+            {
+                MessageBox.Show("Данное действие не зависит от времени!");
+            }
+        }
+
+        private void buttonEditThread2_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+            if (typesOfTimeBasedActions.Contains(actionThread2[selectedActionIndex].getType()))
+            {
+                buttonDelThread2.Enabled = false;
+                buttonReadProgramFromFile.Enabled = false;
+                buttonReadProgramByCom.Enabled = false;
+                numOfEditingThread = 2;
+                indexOfEditingAction = selectedActionIndex;
+                groupBoxEditAction.Visible = true;
+                labelNameEdit.Text = getActionNameByType(actionThread2[selectedActionIndex].getType());
+                textBoxTimeEdit.Text = actionThread2[selectedActionIndex].getTime().ToString();
+            }
+            else
+            {
+                MessageBox.Show("Данное действие не зависит от времени!");
+            }
+        }
+
+        private void buttonEditThread3_Click(object sender, EventArgs e)
+        {
+            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+            if (typesOfTimeBasedActions.Contains(actionThread3[selectedActionIndex].getType()))
+            {
+                buttonDelThread3.Enabled = false;
+                buttonReadProgramFromFile.Enabled = false;
+                buttonReadProgramByCom.Enabled = false;
+                numOfEditingThread = 3;
+                indexOfEditingAction = selectedActionIndex;
+                groupBoxEditAction.Visible = true;
+                labelNameEdit.Text = getActionNameByType(actionThread3[selectedActionIndex].getType());
+                textBoxTimeEdit.Text = actionThread3[selectedActionIndex].getTime().ToString();
+            }
+            else
+            {
+                MessageBox.Show("Данное действие не зависит от времени!");
+            }
+        }
+
+        private void buttonConfirmEdit_Click(object sender, EventArgs e)
+        {
+            int time = getTimeEdit();
+            int selectedActionIndex = -1;
+            if (time != -1)
+            {
+                switch (numOfEditingThread)
+                {
+                    case 1:
+                        if (dataGridView1.SelectedRows.Count > 0)
+                        {
+                            selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                        }
+                        actionThread1[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
+                        dataGridView1.Rows.Clear();
+                        for (int i = 0; i < actionThread1.Count; i++)
+                        {
+                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                            dataGridView1.Rows.Add(tempRow);
+                        }
+                        if (selectedActionIndex != -1)
+                        {
+                            dataGridView1.Rows[selectedActionIndex].Selected = true;
+                            dataGridView1.CurrentCell = dataGridView1.Rows[selectedActionIndex].Cells[0];
+                        }
+                        break;
+                    case 2:
+                        if (dataGridView2.SelectedRows.Count > 0)
+                        {
+                            selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                        }
+                        actionThread2[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
+                        dataGridView2.Rows.Clear();
+                        for (int i = 0; i < actionThread2.Count; i++)
+                        {
+                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                            dataGridView2.Rows.Add(tempRow);
+                        }
+                        if (selectedActionIndex != -1)
+                        {
+                            dataGridView2.Rows[selectedActionIndex].Selected = true;
+                            dataGridView2.CurrentCell = dataGridView2.Rows[selectedActionIndex].Cells[0];
+                        }
+                        break;
+                    case 3:
+                        if (dataGridView3.SelectedRows.Count > 0)
+                        {
+                            selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                        }
+                        actionThread3[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
+                        dataGridView3.Rows.Clear();
+                        for (int i = 0; i < actionThread3.Count; i++)
+                        {
+                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                            dataGridView3.Rows.Add(tempRow);
+                        }
+                        if (selectedActionIndex != -1)
+                        {
+                            dataGridView3.Rows[selectedActionIndex].Selected = true;
+                            dataGridView3.CurrentCell = dataGridView3.Rows[selectedActionIndex].Cells[0];
+                        }
+                        break;
+                }
+                closeEditGroupBox();
+            }
+            else
+            {
+                MessageBox.Show("Проверьте введенные данные!");
+            }
+        }
+
+        private void buttonCancelEdit_Click(object sender, EventArgs e)
+        {
+            closeEditGroupBox();
+        }
+
+        private int getTimeEdit()
+        {
+            try
+            {
+                int time = Int32.Parse(textBoxTimeEdit.Text);
+                if (time > 0)
+                {
+                    return time;
+                }
+            }
+            catch
+            {
+                return -1;
+            }
+            return -1;
+        }
+
+        private void closeEditGroupBox()
+        {
+            groupBoxEditAction.Visible = false;
+            if (actionThread1.Count > 0)
+            {
+                buttonDelThread1.Enabled = true;
+            }
+            if (actionThread2.Count > 0)
+            {
+                buttonDelThread2.Enabled = true;
+            }
+            if (actionThread3.Count > 0)
+            {
+                buttonDelThread3.Enabled = true;
+            }
+            buttonReadProgramFromFile.Enabled = true;
+            if (serialPort != null)
+            {
+                if (serialPort.IsOpen)
+                {
+                    buttonReadProgramByCom.Enabled = true;
+                }
             }
         }
 
