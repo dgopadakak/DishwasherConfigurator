@@ -516,7 +516,7 @@ namespace DishwasherConfigurator
             string s = compilateDishwasherProgram(false) + "!";
             try
             {
-                serialPort.Write(s);
+                serialPort.Write(s + "!");
             }
             catch
             {
