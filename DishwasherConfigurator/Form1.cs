@@ -24,25 +24,30 @@ namespace DishwasherConfigurator
             InitializeComponent();
 
             treeViewActionSelecter.BeginUpdate();                                       // Настройка дерева возможных активностей
+            treeViewActionSelecter.Nodes.Add("Соль");
             treeViewActionSelecter.Nodes.Add("Служебные");
             treeViewActionSelecter.Nodes.Add("Набор воды");
             treeViewActionSelecter.Nodes.Add("Слив воды");
             treeViewActionSelecter.Nodes.Add("Мойка");
             treeViewActionSelecter.Nodes.Add("Сушка");
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли по времени");                    // type: 0
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск по времени");                        // type: 1
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до срабатывания прессостата");       // type: 2
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Пропуск до конца работы прессостата");       // type: 3
-            treeViewActionSelecter.Nodes[0].Nodes.Add("Пустота");                                   // type: -1
-            treeViewActionSelecter.Nodes[1].Nodes.Add("Набор до прессостата");                      // type: 4
-            treeViewActionSelecter.Nodes[1].Nodes.Add("Набор по времени");                          // type: 5
-            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив до прессостата");                       // type: 6
-            treeViewActionSelecter.Nodes[2].Nodes.Add("Слив по времени");                           // type: 7
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Основная помпа по времени");                 // type: 8
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Тэн по времени");                            // type: 9
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Выброс таблетки");                           // type: 10
-            treeViewActionSelecter.Nodes[3].Nodes.Add("Выброс ополаскивателя по времени");          // type: 11
-            treeViewActionSelecter.Nodes[4].Nodes.Add("Вентилятор по времени");                     // type: 12
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли вкл.");                          // type: 0
+            treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли выкл.");                         // type: 1
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Пропуск по времени");                        // type: 2
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Пропуск до срабатывания прессостата");       // type: 3
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Пропуск до конца работы прессостата");       // type: 4
+            treeViewActionSelecter.Nodes[1].Nodes.Add("Пустота");                                   // type: -1
+            treeViewActionSelecter.Nodes[2].Nodes.Add("Набор вкл.");                                // type: 5
+            treeViewActionSelecter.Nodes[2].Nodes.Add("Набор выкл.");                               // type: 6
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Слив вкл.");                                 // type: 7
+            treeViewActionSelecter.Nodes[3].Nodes.Add("Слив выкл.");                                // type: 8
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Помпа вкл.");                                // type: 9
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Помпа выкл.");                               // type: 10
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Тэн вкл.");                                  // type: 11
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Тэн выкл.");                                 // type: 12
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Выброс таблетки");                           // type: 13
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Ополаскиватель вкл.");                       // type: 14
+            treeViewActionSelecter.Nodes[4].Nodes.Add("Ополаскиватель выкл.");                      // type: 15
+            treeViewActionSelecter.Nodes[5].Nodes.Add("Вентилятор по времени");                     // type: 16
             treeViewActionSelecter.EndUpdate();                                         // Конец настройки
             treeViewActionSelecter.ExpandAll();                                         // Развернуть все в дереве
 
@@ -73,8 +78,8 @@ namespace DishwasherConfigurator
                     buttonAddAfterSelectThread3.Enabled = true;
                 }
 
-                labelSelectedAction.Text = "Выбрано действие: " + treeViewActionSelecter.SelectedNode.Text;
-                int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+                labelSelectedAction.Text = "Выбрано: " + treeViewActionSelecter.SelectedNode.Text;
+                int[] typesOfTimeBasedActions = { 16, 2 };
                 if (typesOfTimeBasedActions.Contains(typeOfSelectedAction))
                 {
                     labelTime.Enabled = true;
@@ -110,19 +115,23 @@ namespace DishwasherConfigurator
             switch (treeViewActionSelecter.SelectedNode.Text)
             {
                 case "Пустота": return -1;
-                case "Клапан соли по времени": return 0;
-                case "Пропуск по времени": return 1;
-                case "Пропуск до срабатывания прессостата": return 2;
-                case "Пропуск до конца работы прессостата": return 3;
-                case "Набор до прессостата": return 4;
-                case "Набор по времени": return 5;
-                case "Слив до прессостата": return 6;
-                case "Слив по времени": return 7;
-                case "Основная помпа по времени": return 8;
-                case "Тэн по времени": return 9;
-                case "Выброс таблетки": return 10;
-                case "Выброс ополаскивателя по времени": return 11;
-                case "Вентилятор по времени": return 12;
+                case "Клапан соли вкл.": return 0;
+                case "Клапан соли выкл.": return 1;
+                case "Пропуск по времени": return 2;
+                case "Пропуск до срабатывания прессостата": return 3;
+                case "Пропуск до конца работы прессостата": return 4;
+                case "Набор вкл.": return 5;
+                case "Набор выкл.": return 6;
+                case "Слив вкл.": return 7;
+                case "Слив выкл.": return 8;
+                case "Помпа вкл.": return 9;
+                case "Помпа выкл.": return 10;
+                case "Тэн вкл.": return 11;
+                case "Тэн выкл.": return 12;
+                case "Выброс таблетки": return 13;
+                case "Ополаскиватель вкл.": return 14;
+                case "Ополаскиватель выкл.": return 15;
+                case "Вентилятор по времени": return 16;
             }
             return -2;
         }
@@ -133,7 +142,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -178,7 +187,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -223,7 +232,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -289,7 +298,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -332,7 +341,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -375,7 +384,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -747,7 +756,7 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
             if (typesOfTimeBasedActions.Contains(actionThread1[selectedActionIndex].getType()))
             {
@@ -768,7 +777,7 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
             if (typesOfTimeBasedActions.Contains(actionThread2[selectedActionIndex].getType()))
             {
@@ -789,7 +798,7 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 0, 1, 5, 7, 8, 9, 11, 12 };
+            int[] typesOfTimeBasedActions = { 16, 2 };
             int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
             if (typesOfTimeBasedActions.Contains(actionThread3[selectedActionIndex].getType()))
             {
@@ -1051,19 +1060,23 @@ namespace DishwasherConfigurator
             switch (type)
             {
                 case -1: return "";
-                case 0: return "Клапан соли";
-                case 1: return "Пропуск по времени";
-                case 2: return "Пропуск до сраб. пресс.";
-                case 3: return "Пропуск до к. р. пресс.";
-                case 4: return "Набор до пресс.";
-                case 5: return "Набор по времени";
-                case 6: return "Слив до пресс.";
-                case 7: return "Слив по времени";
-                case 8: return "Основная помпа";
-                case 9: return "Тэн";
-                case 10: return "Таблетка";
-                case 11: return "Ополаскиватель";
-                case 12: return "Вентилятор";
+                case 0: return "Клапан соли вкл.";
+                case 1: return "Клапан соли выкл.";
+                case 2: return "Пропуск по времени";
+                case 3: return "Пропуск до сраб. пресс.";
+                case 4: return "Пропуск до к. р. пресс.";
+                case 5: return "Набор вкл.";
+                case 6: return "Набор выкл.";
+                case 7: return "Слив вкл.";
+                case 8: return "Слив выкл.";
+                case 9: return "Помпа вкл.";
+                case 10: return "Помпа выкл.";
+                case 11: return "Тэн вкл.";
+                case 12: return "Тэн выкл.";
+                case 13: return "Выброс таблетки";
+                case 14: return "Ополаскиватель вкл.";
+                case 15: return "Ополаскиватель выкл.";
+                case 16: return "Вентилятор по времени";
             }
             return "";
         }

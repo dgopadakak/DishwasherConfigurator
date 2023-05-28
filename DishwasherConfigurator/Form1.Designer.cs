@@ -98,14 +98,14 @@
             treeViewActionSelecter.HideSelection = false;
             treeViewActionSelecter.Location = new Point(12, 12);
             treeViewActionSelecter.Name = "treeViewActionSelecter";
-            treeViewActionSelecter.Size = new Size(274, 537);
+            treeViewActionSelecter.Size = new Size(290, 537);
             treeViewActionSelecter.TabIndex = 0;
             // 
             // buttonSelectAction
             // 
             buttonSelectAction.Location = new Point(6, 22);
             buttonSelectAction.Name = "buttonSelectAction";
-            buttonSelectAction.Size = new Size(186, 23);
+            buttonSelectAction.Size = new Size(170, 23);
             buttonSelectAction.TabIndex = 1;
             buttonSelectAction.Text = "Выбрать";
             buttonSelectAction.UseVisualStyleBackColor = true;
@@ -115,6 +115,7 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
             dataGridView1.Location = new Point(496, 27);
@@ -161,6 +162,7 @@
             // 
             dataGridView2.AllowUserToAddRows = false;
             dataGridView2.AllowUserToDeleteRows = false;
+            dataGridView2.AllowUserToResizeRows = false;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { Column4, Column5, Column6 });
             dataGridView2.Location = new Point(740, 27);
@@ -207,6 +209,7 @@
             // 
             dataGridView3.AllowUserToAddRows = false;
             dataGridView3.AllowUserToDeleteRows = false;
+            dataGridView3.AllowUserToResizeRows = false;
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView3.Columns.AddRange(new DataGridViewColumn[] { Column7, Column8, Column9 });
             dataGridView3.Location = new Point(984, 27);
@@ -355,7 +358,7 @@
             // 
             buttonUpdateComPorts.Location = new Point(186, 556);
             buttonUpdateComPorts.Name = "buttonUpdateComPorts";
-            buttonUpdateComPorts.Size = new Size(100, 23);
+            buttonUpdateComPorts.Size = new Size(116, 23);
             buttonUpdateComPorts.TabIndex = 15;
             buttonUpdateComPorts.Text = "Обновить";
             buttonUpdateComPorts.UseVisualStyleBackColor = true;
@@ -365,7 +368,7 @@
             // 
             buttonAcceptCom.Location = new Point(12, 585);
             buttonAcceptCom.Name = "buttonAcceptCom";
-            buttonAcceptCom.Size = new Size(134, 23);
+            buttonAcceptCom.Size = new Size(142, 23);
             buttonAcceptCom.TabIndex = 16;
             buttonAcceptCom.Text = "Подтвердить";
             buttonAcceptCom.UseVisualStyleBackColor = true;
@@ -374,9 +377,9 @@
             // buttonCancelCom
             // 
             buttonCancelCom.Enabled = false;
-            buttonCancelCom.Location = new Point(152, 585);
+            buttonCancelCom.Location = new Point(160, 584);
             buttonCancelCom.Name = "buttonCancelCom";
-            buttonCancelCom.Size = new Size(134, 23);
+            buttonCancelCom.Size = new Size(142, 23);
             buttonCancelCom.TabIndex = 17;
             buttonCancelCom.Text = "Отмена";
             buttonCancelCom.UseVisualStyleBackColor = true;
@@ -385,9 +388,9 @@
             // buttonSendProgramByCom
             // 
             buttonSendProgramByCom.Enabled = false;
-            buttonSendProgramByCom.Location = new Point(12, 614);
+            buttonSendProgramByCom.Location = new Point(160, 613);
             buttonSendProgramByCom.Name = "buttonSendProgramByCom";
-            buttonSendProgramByCom.Size = new Size(134, 23);
+            buttonSendProgramByCom.Size = new Size(142, 23);
             buttonSendProgramByCom.TabIndex = 18;
             buttonSendProgramByCom.Text = "Залить прошивку";
             buttonSendProgramByCom.UseVisualStyleBackColor = true;
@@ -396,9 +399,9 @@
             // buttonReadProgramByCom
             // 
             buttonReadProgramByCom.Enabled = false;
-            buttonReadProgramByCom.Location = new Point(152, 614);
+            buttonReadProgramByCom.Location = new Point(12, 613);
             buttonReadProgramByCom.Name = "buttonReadProgramByCom";
-            buttonReadProgramByCom.Size = new Size(134, 23);
+            buttonReadProgramByCom.Size = new Size(142, 23);
             buttonReadProgramByCom.TabIndex = 19;
             buttonReadProgramByCom.Text = "Прочитать прошивку";
             buttonReadProgramByCom.UseVisualStyleBackColor = true;
@@ -406,9 +409,9 @@
             // 
             // buttonReadProgramFromFile
             // 
-            buttonReadProgramFromFile.Location = new Point(1031, 626);
+            buttonReadProgramFromFile.Location = new Point(696, 626);
             buttonReadProgramFromFile.Name = "buttonReadProgramFromFile";
-            buttonReadProgramFromFile.Size = new Size(191, 23);
+            buttonReadProgramFromFile.Size = new Size(260, 23);
             buttonReadProgramFromFile.TabIndex = 20;
             buttonReadProgramFromFile.Text = "Открыть программу из файла";
             buttonReadProgramFromFile.UseVisualStyleBackColor = true;
@@ -416,9 +419,9 @@
             // 
             // buttonWriteProgramToFile
             // 
-            buttonWriteProgramToFile.Location = new Point(834, 626);
+            buttonWriteProgramToFile.Location = new Point(962, 626);
             buttonWriteProgramToFile.Name = "buttonWriteProgramToFile";
-            buttonWriteProgramToFile.Size = new Size(191, 23);
+            buttonWriteProgramToFile.Size = new Size(260, 23);
             buttonWriteProgramToFile.TabIndex = 21;
             buttonWriteProgramToFile.Text = "Сохранить программу в файл";
             buttonWriteProgramToFile.UseVisualStyleBackColor = true;
@@ -462,7 +465,7 @@
             buttonSelectActionCancel.Enabled = false;
             buttonSelectActionCancel.Location = new Point(6, 114);
             buttonSelectActionCancel.Name = "buttonSelectActionCancel";
-            buttonSelectActionCancel.Size = new Size(186, 23);
+            buttonSelectActionCancel.Size = new Size(170, 23);
             buttonSelectActionCancel.TabIndex = 25;
             buttonSelectActionCancel.Text = "Отмена";
             buttonSelectActionCancel.UseVisualStyleBackColor = true;
@@ -475,9 +478,9 @@
             groupBoxAddAction.Controls.Add(labelSelectedAction);
             groupBoxAddAction.Controls.Add(buttonSelectAction);
             groupBoxAddAction.Controls.Add(buttonSelectActionCancel);
-            groupBoxAddAction.Location = new Point(292, 12);
+            groupBoxAddAction.Location = new Point(308, 12);
             groupBoxAddAction.Name = "groupBoxAddAction";
-            groupBoxAddAction.Size = new Size(198, 145);
+            groupBoxAddAction.Size = new Size(182, 145);
             groupBoxAddAction.TabIndex = 26;
             groupBoxAddAction.TabStop = false;
             groupBoxAddAction.Text = "Добавить действие";
@@ -487,7 +490,7 @@
             textBoxTime.Enabled = false;
             textBoxTime.Location = new Point(74, 85);
             textBoxTime.Name = "textBoxTime";
-            textBoxTime.Size = new Size(118, 23);
+            textBoxTime.Size = new Size(102, 23);
             textBoxTime.TabIndex = 28;
             // 
             // labelTime
@@ -504,7 +507,7 @@
             // 
             labelSelectedAction.Location = new Point(6, 48);
             labelSelectedAction.Name = "labelSelectedAction";
-            labelSelectedAction.Size = new Size(186, 34);
+            labelSelectedAction.Size = new Size(170, 34);
             labelSelectedAction.TabIndex = 26;
             labelSelectedAction.Text = "Действие не выбрано";
             // 
@@ -515,9 +518,9 @@
             groupBoxEditAction.Controls.Add(labelTimeEdit);
             groupBoxEditAction.Controls.Add(textBoxTimeEdit);
             groupBoxEditAction.Controls.Add(labelNameEdit);
-            groupBoxEditAction.Location = new Point(292, 307);
+            groupBoxEditAction.Location = new Point(308, 307);
             groupBoxEditAction.Name = "groupBoxEditAction";
-            groupBoxEditAction.Size = new Size(198, 144);
+            groupBoxEditAction.Size = new Size(182, 144);
             groupBoxEditAction.TabIndex = 27;
             groupBoxEditAction.TabStop = false;
             groupBoxEditAction.Text = "Изменить действие";
@@ -527,7 +530,7 @@
             // 
             buttonCancelEdit.Location = new Point(6, 114);
             buttonCancelEdit.Name = "buttonCancelEdit";
-            buttonCancelEdit.Size = new Size(186, 23);
+            buttonCancelEdit.Size = new Size(170, 23);
             buttonCancelEdit.TabIndex = 4;
             buttonCancelEdit.Text = "Отмена";
             buttonCancelEdit.UseVisualStyleBackColor = true;
@@ -537,7 +540,7 @@
             // 
             buttonConfirmEdit.Location = new Point(6, 85);
             buttonConfirmEdit.Name = "buttonConfirmEdit";
-            buttonConfirmEdit.Size = new Size(186, 23);
+            buttonConfirmEdit.Size = new Size(170, 23);
             buttonConfirmEdit.TabIndex = 3;
             buttonConfirmEdit.Text = "Подтвердить";
             buttonConfirmEdit.UseVisualStyleBackColor = true;
@@ -556,14 +559,14 @@
             // 
             textBoxTimeEdit.Location = new Point(74, 56);
             textBoxTimeEdit.Name = "textBoxTimeEdit";
-            textBoxTimeEdit.Size = new Size(118, 23);
+            textBoxTimeEdit.Size = new Size(102, 23);
             textBoxTimeEdit.TabIndex = 1;
             // 
             // labelNameEdit
             // 
             labelNameEdit.Location = new Point(6, 19);
             labelNameEdit.Name = "labelNameEdit";
-            labelNameEdit.Size = new Size(186, 34);
+            labelNameEdit.Size = new Size(170, 34);
             labelNameEdit.TabIndex = 0;
             labelNameEdit.Text = "Название действия";
             // 
@@ -610,9 +613,9 @@
             groupBoxCalcul.Controls.Add(labelSecOutputCal);
             groupBoxCalcul.Controls.Add(textBoxMinInputCal);
             groupBoxCalcul.Controls.Add(labelMinInputCal);
-            groupBoxCalcul.Location = new Point(292, 163);
+            groupBoxCalcul.Location = new Point(308, 163);
             groupBoxCalcul.Name = "groupBoxCalcul";
-            groupBoxCalcul.Size = new Size(198, 138);
+            groupBoxCalcul.Size = new Size(182, 138);
             groupBoxCalcul.TabIndex = 31;
             groupBoxCalcul.TabStop = false;
             groupBoxCalcul.Text = "Калькулятор";
@@ -621,7 +624,7 @@
             // 
             buttonSecToMinCal.Location = new Point(6, 109);
             buttonSecToMinCal.Name = "buttonSecToMinCal";
-            buttonSecToMinCal.Size = new Size(186, 23);
+            buttonSecToMinCal.Size = new Size(170, 23);
             buttonSecToMinCal.TabIndex = 7;
             buttonSecToMinCal.Text = "Рассчитать";
             buttonSecToMinCal.UseVisualStyleBackColor = true;
@@ -656,7 +659,7 @@
             // 
             buttonMinToSecCal.Location = new Point(6, 51);
             buttonMinToSecCal.Name = "buttonMinToSecCal";
-            buttonMinToSecCal.Size = new Size(186, 23);
+            buttonMinToSecCal.Size = new Size(170, 23);
             buttonMinToSecCal.TabIndex = 3;
             buttonMinToSecCal.Text = "Рассчитать";
             buttonMinToSecCal.UseVisualStyleBackColor = true;
