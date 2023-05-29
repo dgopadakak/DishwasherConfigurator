@@ -30,6 +30,7 @@ namespace DishwasherConfigurator
             treeViewActionSelecter.Nodes.Add("Слив воды");
             treeViewActionSelecter.Nodes.Add("Мойка");
             treeViewActionSelecter.Nodes.Add("Сушка");
+            treeViewActionSelecter.Nodes.Add("Сложные функции");
             treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли вкл.");                          // type: 0
             treeViewActionSelecter.Nodes[0].Nodes.Add("Клапан соли выкл.");                         // type: 1
             treeViewActionSelecter.Nodes[1].Nodes.Add("Пропуск по времени");                        // type: 2
@@ -47,7 +48,10 @@ namespace DishwasherConfigurator
             treeViewActionSelecter.Nodes[4].Nodes.Add("Выброс таблетки");                           // type: 13
             treeViewActionSelecter.Nodes[4].Nodes.Add("Ополаскиватель вкл.");                       // type: 14
             treeViewActionSelecter.Nodes[4].Nodes.Add("Ополаскиватель выкл.");                      // type: 15
-            treeViewActionSelecter.Nodes[5].Nodes.Add("Вентилятор по времени");                     // type: 16
+            treeViewActionSelecter.Nodes[5].Nodes.Add("Вентилятор вкл.");                           // type: 16
+            treeViewActionSelecter.Nodes[5].Nodes.Add("Вентилятор выкл.");                          // type: 17
+            treeViewActionSelecter.Nodes[6].Nodes.Add("Набор воды + помпа вкл.");                   // type: 18
+            treeViewActionSelecter.Nodes[6].Nodes.Add("Набор воды + помпа выкл.");                  // type: 19
             treeViewActionSelecter.EndUpdate();                                         // Конец настройки
             treeViewActionSelecter.ExpandAll();                                         // Развернуть все в дереве
 
@@ -79,7 +83,7 @@ namespace DishwasherConfigurator
                 }
 
                 labelSelectedAction.Text = "Выбрано: " + treeViewActionSelecter.SelectedNode.Text;
-                int[] typesOfTimeBasedActions = { 16, 2 };
+                int[] typesOfTimeBasedActions = { 2 };
                 if (typesOfTimeBasedActions.Contains(typeOfSelectedAction))
                 {
                     labelTime.Enabled = true;
@@ -131,7 +135,10 @@ namespace DishwasherConfigurator
                 case "Выброс таблетки": return 13;
                 case "Ополаскиватель вкл.": return 14;
                 case "Ополаскиватель выкл.": return 15;
-                case "Вентилятор по времени": return 16;
+                case "Вентилятор вкл.": return 16;
+                case "Вентилятор выкл.": return 17;
+                case "Набор воды + помпа вкл.": return 18;
+                case "Набор воды + помпа выкл.": return 19;
             }
             return -2;
         }
@@ -142,7 +149,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -150,13 +157,24 @@ namespace DishwasherConfigurator
                 int selectedActionIndex = -1;
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    selectedActionIndex = dataGridView1.CurrentCell.RowIndex;
                 }
                 actionThread1.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView1.Rows.Clear();
+                int iCorrection = 0;
                 for (int i = 0; i < actionThread1.Count; i++)
                 {
-                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                    string[] tempRow = { "", "", "" };
+                    if (actionThread1[i].getType() == -1)
+                    {
+                        iCorrection++;
+                    }
+                    else
+                    {
+                        tempRow[0] = (i - iCorrection).ToString();
+                        tempRow[1] = getActionNameByType(actionThread1[i].getType());
+                        tempRow[2] = actionThread1[i].getTime().ToString();
+                    }
                     dataGridView1.Rows.Add(tempRow);
                 }
                 if (selectedActionIndex != -1)
@@ -187,7 +205,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -195,13 +213,24 @@ namespace DishwasherConfigurator
                 int selectedActionIndex = -1;
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
-                    selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                    selectedActionIndex = dataGridView2.CurrentCell.RowIndex;
                 }
                 actionThread2.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView2.Rows.Clear();
+                int iCorrection = 0;
                 for (int i = 0; i < actionThread2.Count; i++)
                 {
-                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                    string[] tempRow = { "", "", "" };
+                    if (actionThread2[i].getType() == -1)
+                    {
+                        iCorrection++;
+                    }
+                    else
+                    {
+                        tempRow[0] = (i - iCorrection).ToString();
+                        tempRow[1] = getActionNameByType(actionThread2[i].getType());
+                        tempRow[2] = actionThread2[i].getTime().ToString();
+                    }
                     dataGridView2.Rows.Add(tempRow);
                 }
                 if (selectedActionIndex != -1)
@@ -232,7 +261,7 @@ namespace DishwasherConfigurator
 
         private void buttonAddThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
@@ -240,13 +269,24 @@ namespace DishwasherConfigurator
                 int selectedActionIndex = -1;
                 if (dataGridView3.SelectedRows.Count > 0)
                 {
-                    selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                    selectedActionIndex = dataGridView3.CurrentCell.RowIndex;
                 }
                 actionThread3.Add(new DishAction(typeOfSelectedAction, time));
                 dataGridView3.Rows.Clear();
+                int iCorrection = 0;
                 for (int i = 0; i < actionThread3.Count; i++)
                 {
-                    string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                    string[] tempRow = { "", "", "" };
+                    if (actionThread3[i].getType() == -1)
+                    {
+                        iCorrection++;
+                    }
+                    else
+                    {
+                        tempRow[0] = (i - iCorrection).ToString();
+                        tempRow[1] = getActionNameByType(actionThread3[i].getType());
+                        tempRow[2] = actionThread3[i].getTime().ToString();
+                    }
                     dataGridView3.Rows.Add(tempRow);
                 }
                 if (selectedActionIndex != -1)
@@ -298,19 +338,30 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     closeEditGroupBox();
-                    int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                    int selectedActionIndex = dataGridView1.CurrentCell.RowIndex;
                     actionThread1.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView1.Rows.Clear();
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread1.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread1[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread1[i].getType());
+                            tempRow[2] = actionThread1[i].getTime().ToString();
+                        }
                         dataGridView1.Rows.Add(tempRow);
                     }
                     dataGridView1.Rows[selectedActionIndex].Selected = true;
@@ -341,19 +392,30 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
                 if (dataGridView2.SelectedRows.Count > 0)
                 {
                     closeEditGroupBox();
-                    int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                    int selectedActionIndex = dataGridView2.CurrentCell.RowIndex;
                     actionThread2.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView2.Rows.Clear();
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread2.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread2[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread2[i].getType());
+                            tempRow[2] = actionThread2[i].getTime().ToString();
+                        }
                         dataGridView2.Rows.Add(tempRow);
                     }
                     dataGridView2.Rows[selectedActionIndex].Selected = true;
@@ -384,19 +446,30 @@ namespace DishwasherConfigurator
 
         private void buttonAddAfterSelectThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
+            int[] typesOfTimeBasedActions = { 2 };
             int time = getTime();
             if (time != -1 || !typesOfTimeBasedActions.Contains(typeOfSelectedAction))
             {
                 if (dataGridView3.SelectedRows.Count > 0)
                 {
                     closeEditGroupBox();
-                    int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                    int selectedActionIndex = dataGridView3.CurrentCell.RowIndex;
                     actionThread3.Insert(selectedActionIndex + 1, new DishAction(typeOfSelectedAction, time));
                     dataGridView3.Rows.Clear();
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread3.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread3[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread3[i].getType());
+                            tempRow[2] = actionThread3[i].getTime().ToString();
+                        }
                         dataGridView3.Rows.Add(tempRow);
                     }
                     dataGridView3.Rows[selectedActionIndex].Selected = true;
@@ -702,32 +775,65 @@ namespace DishwasherConfigurator
                         int time = Int32.Parse(tempAction);
                         actionThread3.Add(new DishAction(type, time));
                     }
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread1.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread1[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread1[i].getType());
+                            tempRow[2] = actionThread1[i].getTime().ToString();
+                        }
                         dataGridView1.Rows.Add(tempRow);
                     }
+                    iCorrection = 0;
                     for (int i = 0; i < actionThread2.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread2[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread2[i].getType());
+                            tempRow[2] = actionThread2[i].getTime().ToString();
+                        }
                         dataGridView2.Rows.Add(tempRow);
                     }
+                    iCorrection = 0;
                     for (int i = 0; i < actionThread3.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread3[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread3[i].getType());
+                            tempRow[2] = actionThread3[i].getTime().ToString();
+                        }
                         dataGridView3.Rows.Add(tempRow);
                     }
-                    if (actionThread1.Count > 0)
+                    if (dataGridView1.Rows != null && dataGridView1.Rows.Count != 0)
                     {
                         buttonDelThread1.Enabled = true;
                         buttonEditThread1.Enabled = true;
                     }
-                    if (actionThread2.Count > 0)
+                    if (dataGridView2.Rows != null && dataGridView2.Rows.Count != 0)
                     {
                         buttonDelThread2.Enabled = true;
                         buttonEditThread2.Enabled = true;
                     }
-                    if (actionThread3.Count > 0)
+                    if (dataGridView3.Rows != null && dataGridView3.Rows.Count != 0)
                     {
                         buttonDelThread3.Enabled = true;
                         buttonEditThread3.Enabled = true;
@@ -756,8 +862,8 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread1_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
-            int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            int[] typesOfTimeBasedActions = { 2 };
+            int selectedActionIndex = dataGridView1.CurrentCell.RowIndex;
             if (typesOfTimeBasedActions.Contains(actionThread1[selectedActionIndex].getType()))
             {
                 buttonDelThread1.Enabled = false;
@@ -777,8 +883,8 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread2_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
-            int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+            int[] typesOfTimeBasedActions = { 2 };
+            int selectedActionIndex = dataGridView2.CurrentCell.RowIndex;
             if (typesOfTimeBasedActions.Contains(actionThread2[selectedActionIndex].getType()))
             {
                 buttonDelThread2.Enabled = false;
@@ -798,8 +904,8 @@ namespace DishwasherConfigurator
 
         private void buttonEditThread3_Click(object sender, EventArgs e)
         {
-            int[] typesOfTimeBasedActions = { 16, 2 };
-            int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+            int[] typesOfTimeBasedActions = { 2 };
+            int selectedActionIndex = dataGridView3.CurrentCell.RowIndex;
             if (typesOfTimeBasedActions.Contains(actionThread3[selectedActionIndex].getType()))
             {
                 buttonDelThread3.Enabled = false;
@@ -828,13 +934,24 @@ namespace DishwasherConfigurator
                     case 1:
                         if (dataGridView1.SelectedRows.Count > 0)
                         {
-                            selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                            selectedActionIndex = dataGridView1.CurrentCell.RowIndex;
                         }
                         actionThread1[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
                         dataGridView1.Rows.Clear();
+                        int iCorrection = 0;
                         for (int i = 0; i < actionThread1.Count; i++)
                         {
-                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                            string[] tempRow = { "", "", "" };
+                            if (actionThread1[i].getType() == -1)
+                            {
+                                iCorrection++;
+                            }
+                            else
+                            {
+                                tempRow[0] = (i - iCorrection).ToString();
+                                tempRow[1] = getActionNameByType(actionThread1[i].getType());
+                                tempRow[2] = actionThread1[i].getTime().ToString();
+                            }
                             dataGridView1.Rows.Add(tempRow);
                         }
                         if (selectedActionIndex != -1)
@@ -846,13 +963,24 @@ namespace DishwasherConfigurator
                     case 2:
                         if (dataGridView2.SelectedRows.Count > 0)
                         {
-                            selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                            selectedActionIndex = dataGridView2.CurrentCell.RowIndex;
                         }
                         actionThread2[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
                         dataGridView2.Rows.Clear();
+                        iCorrection = 0;
                         for (int i = 0; i < actionThread2.Count; i++)
                         {
-                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                            string[] tempRow = { "", "", "" };
+                            if (actionThread2[i].getType() == -1)
+                            {
+                                iCorrection++;
+                            }
+                            else
+                            {
+                                tempRow[0] = (i - iCorrection).ToString();
+                                tempRow[1] = getActionNameByType(actionThread2[i].getType());
+                                tempRow[2] = actionThread2[i].getTime().ToString();
+                            }
                             dataGridView2.Rows.Add(tempRow);
                         }
                         if (selectedActionIndex != -1)
@@ -864,13 +992,24 @@ namespace DishwasherConfigurator
                     case 3:
                         if (dataGridView3.SelectedRows.Count > 0)
                         {
-                            selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                            selectedActionIndex = dataGridView3.CurrentCell.RowIndex;
                         }
                         actionThread3[indexOfEditingAction].setTime(Int32.Parse(textBoxTimeEdit.Text));
                         dataGridView3.Rows.Clear();
+                        iCorrection = 0;
                         for (int i = 0; i < actionThread3.Count; i++)
                         {
-                            string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                            string[] tempRow = { "", "", "" };
+                            if (actionThread3[i].getType() == -1)
+                            {
+                                iCorrection++;
+                            }
+                            else
+                            {
+                                tempRow[0] = (i - iCorrection).ToString();
+                                tempRow[1] = getActionNameByType(actionThread3[i].getType());
+                                tempRow[2] = actionThread3[i].getTime().ToString();
+                            }
                             dataGridView3.Rows.Add(tempRow);
                         }
                         if (selectedActionIndex != -1)
@@ -943,14 +1082,26 @@ namespace DishwasherConfigurator
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int selectedActionIndex = Int32.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                int selectedActionIndex = dataGridView1.CurrentCell.RowIndex;
                 actionThread1.RemoveAt(selectedActionIndex);
+                int countRows = dataGridView1.Rows.Count;
                 dataGridView1.Rows.Clear();
-                if (actionThread1.Count > 0)
+                if (countRows - 1 > 0)
                 {
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread1.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread1[i].getType()), actionThread1[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread1[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread1[i].getType());
+                            tempRow[2] = actionThread1[i].getTime().ToString();
+                        }
                         dataGridView1.Rows.Add(tempRow);
                     }
                 }
@@ -971,14 +1122,26 @@ namespace DishwasherConfigurator
         {
             if (dataGridView2.SelectedRows.Count > 0)
             {
-                int selectedActionIndex = Int32.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                int selectedActionIndex = dataGridView2.CurrentCell.RowIndex;
                 actionThread2.RemoveAt(selectedActionIndex);
+                int countRows = dataGridView2.Rows.Count;
                 dataGridView2.Rows.Clear();
-                if (actionThread2.Count > 0)
+                if (countRows - 1 > 0)
                 {
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread2.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread2[i].getType()), actionThread2[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread2[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread2[i].getType());
+                            tempRow[2] = actionThread2[i].getTime().ToString();
+                        }
                         dataGridView2.Rows.Add(tempRow);
                     }
                 }
@@ -999,14 +1162,26 @@ namespace DishwasherConfigurator
         {
             if (dataGridView3.SelectedRows.Count > 0)
             {
-                int selectedActionIndex = Int32.Parse(dataGridView3.CurrentRow.Cells[0].Value.ToString());
+                int selectedActionIndex = dataGridView3.CurrentCell.RowIndex;
                 actionThread3.RemoveAt(selectedActionIndex);
+                int countRows = dataGridView3.Rows.Count;
                 dataGridView3.Rows.Clear();
-                if (actionThread3.Count > 0)
+                if (countRows - 1 > 0)
                 {
+                    int iCorrection = 0;
                     for (int i = 0; i < actionThread3.Count; i++)
                     {
-                        string[] tempRow = { i.ToString(), getActionNameByType(actionThread3[i].getType()), actionThread3[i].getTime().ToString() };
+                        string[] tempRow = { "", "", "" };
+                        if (actionThread3[i].getType() == -1)
+                        {
+                            iCorrection++;
+                        }
+                        else
+                        {
+                            tempRow[0] = (i - iCorrection).ToString();
+                            tempRow[1] = getActionNameByType(actionThread3[i].getType());
+                            tempRow[2] = actionThread3[i].getTime().ToString();
+                        }
                         dataGridView3.Rows.Add(tempRow);
                     }
                 }
@@ -1076,7 +1251,10 @@ namespace DishwasherConfigurator
                 case 13: return "Выброс таблетки";
                 case 14: return "Ополаскиватель вкл.";
                 case 15: return "Ополаскиватель выкл.";
-                case 16: return "Вентилятор по времени";
+                case 16: return "Вентилятор вкл.";
+                case 17: return "Вентилятор выкл.";
+                case 18: return "Набор + помпа вкл.";
+                case 19: return "Набор + помпа выкл.";
             }
             return "";
         }
