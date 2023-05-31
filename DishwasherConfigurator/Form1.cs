@@ -1,6 +1,7 @@
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System.IO.Ports;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DocumentFormat.OpenXml;
 
 namespace DishwasherConfigurator
 {
@@ -1226,6 +1227,226 @@ namespace DishwasherConfigurator
             {
                 labelMinOutputCal.Text = "= Ошибка";
             }
+        }
+
+        #endregion
+
+        #region Экспорт в .docx
+
+        private void buttonExportThread1ToDOCX_Click(object sender, EventArgs e)
+        {
+            Table tableForExport = new Table();
+            DataGridView dataToExport = new DataGridView();
+            dataToExport.Columns.Add("exportColumn1", "№");
+            dataToExport.Columns.Add("exportColumn2", "Описание");
+            dataToExport.Columns.Add("exportColumn3", "Время");
+
+            bool isSalt = false;        // 0, 1
+            bool isPumpIn = false;      // 5, 6
+            bool isPumpOut = false;     // 7, 8
+            bool isMainPump = false;    // 9, 10
+            bool isHeater = false;      // 11, 12
+            bool isRinser = false;      // 14, 15
+            bool isFan = false;         // 16, 17
+
+            int[] skippedActions = { 0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17 };
+
+            int iCorrection = 0;
+            for (int i = 0; i < actionThread1.Count; i++)
+            {
+                if (skippedActions.Contains(actionThread1[i].getType()))        // действия включения или выключения
+                {
+                    switch (actionThread1[i].getType())
+                    {
+                        case 0: isSalt = true; break;
+                        case 1: isSalt = false; break;
+                        case 5: isPumpIn = true; break;
+                        case 6: isPumpIn = false; break;
+                        case 7: isPumpOut = true; break;
+                        case 8: isPumpOut = false; break;
+                        case 9: isMainPump = true; break;
+                        case 10: isMainPump = false; break;
+                        case 11: isHeater = true; break;
+                        case 12: isHeater = false; break;
+                        case 14: isRinser = true; break;
+                        case 15: isRinser = false; break;
+                        case 16: isFan = true; break;
+                        case 17: isFan = false; break;
+                    }
+                }
+                else
+                {
+                    string[] rowString = { "", "", "" };
+                    switch (actionThread1[i].getType())                         // задержки или самостоятельные действия (таблетка, сложные функции)
+                    {
+                        case -1:    // Пустота
+                            iCorrection++;
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 2:     // Пропуск по времени
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "Пt" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan);
+                            rowString[2] = actionThread1[i].getTime().ToString();
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 3:     // Пропуск до срабатывания прессостата
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "П1" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan);
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 4:     // Пропуск до конца работы прессостата
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "П0" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan);
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 13:    // Выброс таблетки
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "Выброс таблетки";
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 18:    // Набор воды + помпа вкл.
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "Набор воды + помпа вкл.";
+                            isMainPump = true;
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                        case 19:    // Набор воды + помпа выкл.
+                            rowString[0] = (i - iCorrection).ToString();
+                            rowString[1] = "Набор воды + помпа выкл.";
+                            dataToExport.Rows.Add(rowString);
+                            break;
+                    }
+                }
+            }
+            string[] endString = { "!", "Конец" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan), "!" };
+            dataToExport.Rows.Add(endString);
+
+            SaveFileDialog oSaveFileDialog = new SaveFileDialog();
+            oSaveFileDialog.Filter = "Word document|*.docx";
+            if (oSaveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                createWordprocessingDocument(oSaveFileDialog.FileName, dataToExport);
+            }
+        }
+
+        public static void createWordprocessingDocument(string filepath, DataGridView dataToExport)
+        {
+            int columncount = dataToExport.Columns.Count;
+            int rowcount = dataToExport.Rows.Count;
+            using (WordprocessingDocument wordDocument = WordprocessingDocument.Create(filepath, WordprocessingDocumentType.Document))
+            {
+                MainDocumentPart mainPart = wordDocument.AddMainDocumentPart();
+                mainPart.Document = new Document();    
+                Body body = new Body();
+                Table table = new Table();    
+                TableProperties tblProp = new TableProperties(
+                new TableBorders(
+                new TopBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                },
+                new BottomBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                },
+                new LeftBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                },
+                new RightBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                },
+                new InsideHorizontalBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                },
+                new InsideVerticalBorder()
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.BasicBlackDots),
+                    Size = 5
+                }));
+                table.AppendChild<TableProperties>(tblProp);
+                TableRow tr = new TableRow();    
+                TableCell[] tc1 = new TableCell[5];   
+                for (int i = 0; i < columncount; i++)
+                {
+                    string[] columnhead = new string[columncount];
+                    columnhead[i] = dataToExport.Columns[i].HeaderText.ToString();
+                    tc1[i] = new TableCell();
+                    int width = 8000;
+                    if (i == 0)
+                    {
+                        width = 700;
+                    }
+                    if (i == 2)
+                    {
+                        width = 900;
+                    }
+                    tc1[i].Append(new TableCellProperties(
+                    new TableCellWidth()
+                    {
+                        Type = TableWidthUnitValues.Dxa,
+                        Width = width.ToString()
+                    }));  
+                    tc1[i].Append(new Paragraph(new Run(new Text(columnhead[i]))));
+                    tr.Append(tc1[i]);
+                }
+                table.Append(tr);
+                for (int i = 0; i < rowcount; i++)
+                {
+                    tr = new TableRow(); 
+                    tc1 = new TableCell[columncount];
+                    for (int j = 0; j < columncount; j++)
+                    {
+                        tc1[j] = new TableCell();
+                        string data1 = "";
+                        if (dataToExport.Rows[i].Cells[j].Value != null)
+                        {
+                            data1 = dataToExport.Rows[i].Cells[j].Value.ToString();
+                        }
+                        int width = 8000;
+                        if (j == 0)
+                        {
+                            width = 700;
+                        }
+                        if (j == 2)
+                        {
+                            width = 900;
+                        }
+                        tc1[j].Append(new TableCellProperties(
+                        new TableCellWidth()
+                        {
+                            Type = TableWidthUnitValues.Dxa,
+                            Width = width.ToString()
+                        }));   
+                        tc1[j].Append(new Paragraph(new Run(new Text(data1))));
+                        tr.Append(tc1[j]);
+                    }  
+                    table.Append(tr);
+                }
+                body.Append(table);
+                mainPart.Document.Append(body);
+                mainPart.Document.Save();
+            }
+        }
+
+        private string getStringOfPowerOnModuls(bool isSalt, bool isPumpIn, bool isPumpOut, bool isMainPump, bool isHeater, bool isRinser, bool isFan)
+        {
+            string s = "";
+            if (isSalt)     { s += " + соль"; }
+            if (isPumpIn)   { s += " + залив"; }
+            if (isPumpOut)  { s += " + слив"; }
+            if (isMainPump) { s += " + помпа"; }
+            if (isHeater)   { s += " + ТЭН"; }
+            if (isRinser)   { s += " + ополаск."; }
+            if (isFan)      { s += " + сушка"; }
+            return s;
         }
 
         #endregion

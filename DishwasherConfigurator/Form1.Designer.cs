@@ -85,6 +85,7 @@
             labelSecOutputCal = new Label();
             textBoxMinInputCal = new TextBox();
             labelMinInputCal = new Label();
+            buttonExportThread1ToDOCX = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -690,12 +691,23 @@
             labelMinInputCal.TabIndex = 0;
             labelMinInputCal.Text = "Мин.:";
             // 
+            // buttonExportThread1ToDOCX
+            // 
+            buttonExportThread1ToDOCX.Location = new Point(442, 626);
+            buttonExportThread1ToDOCX.Name = "buttonExportThread1ToDOCX";
+            buttonExportThread1ToDOCX.Size = new Size(248, 23);
+            buttonExportThread1ToDOCX.TabIndex = 32;
+            buttonExportThread1ToDOCX.Text = "Экспорт первого потока в .docx";
+            buttonExportThread1ToDOCX.UseVisualStyleBackColor = true;
+            buttonExportThread1ToDOCX.Click += buttonExportThread1ToDOCX_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1234, 661);
+            Controls.Add(buttonExportThread1ToDOCX);
             Controls.Add(groupBoxCalcul);
             Controls.Add(buttonAddAfterSelectThread3);
             Controls.Add(buttonAddAfterSelectThread2);
@@ -803,5 +815,6 @@
         private Label labelTimeEdit;
         private TextBox textBoxTimeEdit;
         private Label labelNameEdit;
+        private Button buttonExportThread1ToDOCX;
     }
 }
