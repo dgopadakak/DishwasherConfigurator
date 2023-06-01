@@ -1318,7 +1318,7 @@ namespace DishwasherConfigurator
                     }
                 }
             }
-            string[] endString = { "!", "Конец" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan), "!" };
+            string[] endString = { (actionThread1.Count - iCorrection).ToString(), "Конец" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan), "!" };
             dataToExport.Rows.Add(endString);
 
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
@@ -1398,9 +1398,9 @@ namespace DishwasherConfigurator
                     tr.Append(tc1[i]);
                 }
                 table.Append(tr);
-                for (int i = 0; i < rowcount; i++)
+                for (int i = 0; i < (rowcount - 1); i++)
                 {
-                    tr = new TableRow(); 
+                    tr = new TableRow();
                     tc1 = new TableCell[columncount];
                     for (int j = 0; j < columncount; j++)
                     {
@@ -1424,10 +1424,16 @@ namespace DishwasherConfigurator
                         {
                             Type = TableWidthUnitValues.Dxa,
                             Width = width.ToString()
-                        }));   
-                        tc1[j].Append(new Paragraph(new Run(new Text(data1))));
+                        }));
+                        SpacingBetweenLines spacing = new SpacingBetweenLines() { Line = "240", LineRule = LineSpacingRuleValues.Auto, Before = "0", After = "0" };
+                        Paragraph pr = new Paragraph();
+                        ParagraphProperties prp = new ParagraphProperties();
+                        prp.Append(spacing);
+                        pr.Append(prp);
+                        pr.Append(new Run(new Text(data1)));
+                        tc1[j].Append(pr);
                         tr.Append(tc1[j]);
-                    }  
+                    }
                     table.Append(tr);
                 }
                 body.Append(table);
