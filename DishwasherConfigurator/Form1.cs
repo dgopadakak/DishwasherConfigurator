@@ -1318,7 +1318,7 @@ namespace DishwasherConfigurator
                     }
                 }
             }
-            string[] endString = { (actionThread1.Count - iCorrection).ToString(), "Конец" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan), "!" };
+            string[] endString = { (actionThread1.Count - iCorrection).ToString(), "Конец" + getStringOfPowerOnModuls(isSalt, isPumpIn, isPumpOut, isMainPump, isHeater, isRinser, isFan), "" };
             dataToExport.Rows.Add(endString);
 
             SaveFileDialog oSaveFileDialog = new SaveFileDialog();
